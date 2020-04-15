@@ -129,10 +129,6 @@
               "devServerTarget": "getlost-frontend:serve:production"
             }
           }
-        },
-        "deploy": {
-          "builder": "@angular/fire:deploy",
-          "options": {}
         }
       }
     }
