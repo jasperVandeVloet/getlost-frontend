@@ -1,0 +1,32 @@
+.app-loading {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(40, 38, 48);
+
+  &.loaded{
+    animation-name: fadeOut;
+    animation-duration: 2s;
+    animation-timing-function: normal;
+    animation-delay: 2s;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
+
+  #lottie {
+    width: 100px;
+  }
+
+  @keyframes fadeOut {
+    0%{
+      opacity: 1;
+    }
+    100%{
+      opacity: 0;
+    }
+  }
+
+}

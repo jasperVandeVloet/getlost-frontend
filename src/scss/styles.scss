@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@import './fonts';
+
+@import './variables';
+
+@import './base';
+
+@import './pages/loadingscreen';
+@import './pages/home';
