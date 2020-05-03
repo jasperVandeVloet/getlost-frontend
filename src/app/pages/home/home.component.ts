@@ -3,12 +3,17 @@ import { Title } from '@angular/platform-browser';
 
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
+declare var Rellax: any;
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
+
+
+
 export class HomeComponent implements OnInit {
+  public rellax;
   public options: AnimationOptions = {
     // path: 'https://assets3.lottiefiles.com/packages/lf20_ZWEJL5.json',
     path: '/assets/json/loading.json',
@@ -21,6 +26,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.rellax = new Rellax('.rellax');
     this.setTitle('Get Lost - Home');
   }
 
