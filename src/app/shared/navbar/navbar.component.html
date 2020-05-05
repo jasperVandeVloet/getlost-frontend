@@ -1,0 +1,30 @@
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark p-0 fixed-top justify-content-end" [ngClass]="{'bg-dark slideIn': !isCollapsed}">
+    <button class="navbar-toggler btn-ham p-4" type="button" (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+      <div class="hamburger" [ngClass]="{open: !isCollapsed}">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+
+    <div [collapse]="isCollapsed" id="navbarSupportedContent" class="collapse navbar-collapse bg-dark" [class.slideIn]="!isCollapsed" [class.slideOut]="isCollapsed">
+      <div class="container">
+      <ul class="navbar-nav text-center">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/" (click)="isCollapsed = !isCollapsed">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/wandelingen"
+            (click)="isCollapsed = !isCollapsed">Ontdek</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/hoe-werkt-het"
+            (click)="isCollapsed = !isCollapsed">Hoe werkt het?</a>
+        </li>
+      </ul>
+      </div>
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,47 @@
+.walks {
+  .item {
+    @extend .rounded-custom-left;
+
+    width: 100%;
+    height: 200px;
+    position: relative;
+
+    .item-img {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      position: relative;
+
+      img {
+        @extend .rounded-custom-left;
+
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &::after {
+        @extend .rounded-custom-left;
+        content: "";
+
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: transparent linear-gradient(180deg, #FFCF4D6E 0%, #148B142F 100%, #004F68 100%) 0% 0% no-repeat;
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
+      }
+    }
+
+    .item-body {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+  }
+}

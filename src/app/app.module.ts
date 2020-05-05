@@ -1,20 +1,27 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 
 import { environment } from '../environments/environment';
 import { HomeComponent } from './pages/home/home.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { WalksComponent } from './pages/walks/walks.component';
+import { WalkComponent } from './pages/walks/walk/walk.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 // Note we need a separate function as it's required
-// by the AOT compiler.
+// by the AOT compiler. Lottie
 export function playerFactory() {
   return player;
 }
@@ -22,14 +29,21 @@ export function playerFactory() {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent,
+    PageNotFoundComponent,
+    WalksComponent,
+    WalkComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    CollapseModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    LottieModule.forRoot({ player: playerFactory })
+    LottieModule.forRoot({ player: playerFactory }),
+    HttpClientModule,
   ],
   providers: [
     Title

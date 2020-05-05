@@ -13,20 +13,20 @@ declare var Rellax: any;
 
 
 export class HomeComponent implements OnInit {
-  public rellax;
-  public options: AnimationOptions = {
-    // path: 'https://assets3.lottiefiles.com/packages/lf20_ZWEJL5.json',
-    path: '/assets/json/loading.json',
-    autoplay: true,
-    loop: false
-  };
+  // public rellax;
+  // public options: AnimationOptions = {
+  //   // path: 'https://assets3.lottiefiles.com/packages/lf20_ZWEJL5.json',
+  //   path: '/assets/json/loading.json',
+  //   autoplay: true,
+  //   loop: false
+  // };
 
   constructor(
     private titleService: Title
   ) { }
 
   ngOnInit(): void {
-    this.rellax = new Rellax('.rellax');
+    // this.rellax = new Rellax('.rellax');
     this.setTitle('Get Lost - Home');
   }
 
@@ -34,8 +34,8 @@ export class HomeComponent implements OnInit {
     this.titleService.setTitle(newTitle);
   }
 
-  animationCreated(animationItem: AnimationItem): void {
-    console.log(animationItem);
-  }
+  // animationCreated(animationItem: AnimationItem): void {
+  //   console.log(animationItem);
+  // }
 
 }

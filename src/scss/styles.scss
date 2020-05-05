@@ -1,8 +1,15 @@
 @import './fonts';
 
-@import './variables';
+@import './variables/bootstrap-variables';
+@import './variables/project-variables';
+
+@import "node_modules/bootstrap/scss/bootstrap";
+@import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 @import './base';
 
 @import './pages/loadingscreen';
 @import './pages/home';
+@import './pages/walks';
+
+@import './components/navbar';

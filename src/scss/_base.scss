@@ -1,0 +1,56 @@
+html, body, .wrapper {
+  height: 100%;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    flex: 1 0 auto;
+  }
+  .footer {
+    flex-shrink: 0;
+  }
+}
+
+h3 {
+  font-family: $font-family-sans-serif;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+
+// Buttons
+
+.btn {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.btn-custom-left {
+  border-radius: 10px 10px 10px 50px;
+}
+
+.btn-custom-right {
+  border-radius: 10px 10px 50px 10px;
+}
+
+
+.rounded-custom-left {
+  border-radius: $border-radius-left;
+
+  .card-img-top {
+    border-radius: $border-radius-left-bottom-0;
+  }
+}
+
+// .rounded-custom-right {
+//   border-radius: $border-radius-right;
+
+//     .card-img-top {
+//     border-radius: $border-radius-right-bottom-0;
+//   }
+// }
