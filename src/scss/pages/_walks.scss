@@ -1,28 +1,26 @@
 .walks {
-  .item {
-    @extend .rounded-custom-left;
-
+  .walk {
+    border-radius: $border-radius-left;
     width: 100%;
     height: 200px;
     position: relative;
 
-    .item-img {
+    .walk-img {
       width: 100%;
       height: 100%;
       padding: 0;
       position: relative;
 
       img {
-        @extend .rounded-custom-left;
-
+        border-radius: $border-radius-left;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transform: skew(5deg);
+        // transform: skewY(-3deg) ;
       }
 
       &::after {
-        @extend .rounded-custom-left;
+        border-radius: $border-radius-left;
         content: "";
 
         position: absolute;
@@ -31,20 +29,24 @@
         top: 0;
         left: 0;
 
-        transform: skew(5deg);
-        background: transparent linear-gradient(180deg, #FFCF4D6E 0%, #148B142F 100%, #004F68 100%) 0% 0% no-repeat;
-        backdrop-filter: blur(1px);
-        -webkit-backdrop-filter: blur(1px);
+        // transform: skewY(-3deg);
+        opacity: .7;
+        background-image: linear-gradient(to top, #78683a, #686637, #596337, #4a5f39, #3b5b3b);
+        backdrop-filter: blur(.5px);
+        -webkit-backdrop-filter: blur(.5px);
       }
     }
 
-    .item-body {
+    .walk-body {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
+      // width: 100%;
       height: 100%;
     }
+  }
 
+  .skew {
+    transform: skewY(-2deg);
   }
 }

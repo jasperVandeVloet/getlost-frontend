@@ -21,5 +21,9 @@ export class ApiService {
     return this.http.get<Walk[]>(this.basePath + 'walks');
   }
 
+  public getWalk(slug: string): Observable<Walk> {
+    return this.http.get<Walk>(this.basePath + 'walks/' + slug);
+  }
+
 
 }

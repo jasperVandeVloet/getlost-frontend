@@ -1,2 +1,18 @@
-<p>walk works!</p>
-<h1>gelukt! </h1>
+<div class="walk" *ngIf="walk?.id; else loading">
+  <img src="{{ walk?.image.url }}" alt="{{ walk?.slug }}" class="w-100">
+
+  <div class="container">
+    <h3>{{ walk?.title }}</h3>
+    <h5 class="specs">
+      <i class="fas fa-baby-carriage pr-3" *ngIf="walk?.kids_friendly"></i>
+      <i class="fas fa-wheelchair  pr-3" *ngIf="walk?.wheelchair_friendly"></i>
+    </h5>
+
+    <h4>Inleiding</h4>
+    <p>{{ walk?.description }}</p>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

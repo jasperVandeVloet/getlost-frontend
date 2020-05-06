@@ -6,31 +6,29 @@
       <aside class="col-4">
         <h4 class="text-uppercase font-weight-bold"><i class="fas fa-sliders-h"></i><span class="ml-2">Filter</span>
         </h4>
-        <div class="filter border rounded">
+        <div class="filter border rounded skew">
           filter
         </div>
       </aside>
-      <div class="main col border">
-        <div *ngIf="walks?.length > 0 ; else loading">
-          <ul>
-            <li *ngFor="let item of walks">
-              <a href="wandelingen/{{item.slug}}" class="btn btn-link item">
-                <div class="item-img">
-                  <img src="{{item.thumbnail.url}}" alt="{{item.slug}}">
-                </div>
-                <div class="item-body px-5 py-4 text-light text-left d-flex flex-column justify-content-between">
-                  <h4>{{ item.title }}</h4>
+      <div class="main col-8">
+        <ul *ngIf="walks?.length > 0 ; else loading">
+          <li *ngFor="let walk of walks" class="mb-3">
+            <a href="wandelingen/{{walk.slug}}" class="btn btn-link w-100 p-0 walk">
+              <div class="walk-img skew">
+                <img src="{{walk.image.url}}" alt="{{walk.slug}}" class="w-100">
+              </div>
+              <div class="walk-body text-light pt-4 pb-3 px-4 d-flex flex-column justify-content-between">
+                <h4 class="text-left">{{ walk.title }}</h4>
 
-                  <h5 class="specs">
-                    <i class="fas fa-baby-carriage pr-3" *ngIf="item.kids_friendly"></i>
-                    <i class="fas fa-wheelchair  pr-3" *ngIf="item.wheelchair_friendly"></i>
-                  </h5>
+              <h5 class="specs text-left">
+                <i class="fas fa-baby-carriage pr-3" *ngIf="walk.kids_friendly"></i>
+                <i class="fas fa-wheelchair  pr-3" *ngIf="walk.wheelchair_friendly"></i>
+              </h5>
+            </div>
 
-                </div>
-              </a>
-            </li>
-          </ul>
-        </div>
+            </a>
+          </li>
+        </ul>
         <ng-template #loading>
           <app-loader></app-loader>
         </ng-template>
