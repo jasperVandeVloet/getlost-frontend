@@ -17,7 +17,7 @@ export class ApiService {
     public http: HttpClient,
   ) {}
 
-  public getJourneys(): Observable<Walk[]> {
+  public getWalks(): Observable<Walk[]> {
     return this.http.get<Walk[]>(this.basePath + 'walks');
   }
 

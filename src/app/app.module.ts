@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +19,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { WalksComponent } from './pages/walks/walks.component';
 import { WalkComponent } from './pages/walks/walk/walk.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 // Note we need a separate function as it's required
 // by the AOT compiler. Lottie
@@ -34,7 +35,8 @@ export function playerFactory() {
     PageNotFoundComponent,
     WalksComponent,
     WalkComponent,
-    FooterComponent
+    FooterComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,7 @@ export function playerFactory() {
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     LottieModule.forRoot({ player: playerFactory }),
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     Title

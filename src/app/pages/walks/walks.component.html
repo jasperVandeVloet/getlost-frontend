@@ -11,24 +11,29 @@
         </div>
       </aside>
       <div class="main col border">
-        <ul>
-          <li *ngFor="let item of walks | async">
-            <a href="wandelingen/{{item.slug}}" class="btn btn-link item">
-              <div class="item-img">
-                <img src="{{item.thumbnail.url}}" alt="{{item.slug}}">
-              </div>
-              <div class="item-body px-5 py-4 text-light text-left d-flex flex-column justify-content-between">
-                <h4>{{ item.title }}</h4>
+        <div *ngIf="walks?.length > 0 ; else loading">
+          <ul>
+            <li *ngFor="let item of walks">
+              <a href="wandelingen/{{item.slug}}" class="btn btn-link item">
+                <div class="item-img">
+                  <img src="{{item.thumbnail.url}}" alt="{{item.slug}}">
+                </div>
+                <div class="item-body px-5 py-4 text-light text-left d-flex flex-column justify-content-between">
+                  <h4>{{ item.title }}</h4>
 
-                <h5 class="specs">
-                  <i class="fas fa-baby-carriage pr-3" *ngIf="item.kids_friendly"></i>
-                  <i class="fas fa-wheelchair  pr-3" *ngIf="item.wheelchair_friendly"></i>
-                </h5>
+                  <h5 class="specs">
+                    <i class="fas fa-baby-carriage pr-3" *ngIf="item.kids_friendly"></i>
+                    <i class="fas fa-wheelchair  pr-3" *ngIf="item.wheelchair_friendly"></i>
+                  </h5>
 
-              </div>
-            </a>
-          </li>
-        </ul>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <ng-template #loading>
+          <app-loader></app-loader>
+        </ng-template>
       </div>
     </div>
 
