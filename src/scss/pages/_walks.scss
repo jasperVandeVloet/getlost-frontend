@@ -49,4 +49,27 @@
   .skew {
     transform: skewY(-2deg);
   }
+
+  .filter {
+    .custom-slider .ng5-slider .ng5-slider-bar {
+      background: $gray-200;
+      height: 6px;
+      border-radius: 6px;
+    }
+    .custom-slider .ng5-slider .ng5-slider-selection {
+      background: $primary;
+    }
+
+    .custom-slider .ng5-slider .ng5-slider-pointer {
+      width: 16px;
+      height: 16px;
+      top: -5px;
+      background-color: $primary;
+    }
+
+    .custom-slider .ng5-slider .ng5-slider-pointer:after {
+      display: none;
+    }
+  }
 }
+

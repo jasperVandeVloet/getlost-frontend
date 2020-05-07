@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
+import { Ng5SliderModule } from 'ng5-slider';
 
 import { environment } from '../environments/environment';
 import { HomeComponent } from './pages/home/home.component';
@@ -20,6 +21,7 @@ import { WalksComponent } from './pages/walks/walks.component';
 import { WalkComponent } from './pages/walks/walk/walk.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoaderComponent } from './shared/loader/loader.component';
+import { DifficultyRatingComponent } from './components/difficulty-rating/difficulty-rating.component';
 
 // Note we need a separate function as it's required
 // by the AOT compiler. Lottie
@@ -36,7 +38,8 @@ export function playerFactory() {
     WalksComponent,
     WalkComponent,
     FooterComponent,
-    LoaderComponent
+    LoaderComponent,
+    DifficultyRatingComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ export function playerFactory() {
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     LottieModule.forRoot({ player: playerFactory }),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng5SliderModule
   ],
   providers: [
     Title
