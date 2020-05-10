@@ -1,5 +1,5 @@
 <div class="container">
-  <nav class="navbar navbar-expand-lg navbar-dark p-0 fixed-top justify-content-end" [ngClass]="{'bg-dark slideIn': !isCollapsed}">
+  <nav class="navbar navbar-dark p-0 fixed-top justify-content-end" [ngClass]="{'bg-dark slideIn': !isCollapsed}">
     <button class="navbar-toggler btn-ham p-4" type="button" (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
       <div class="hamburger" [ngClass]="{open: !isCollapsed}">
@@ -9,7 +9,7 @@
       </div>
     </button>
 
-    <div [collapse]="isCollapsed" id="navbarSupportedContent" class="collapse navbar-collapse bg-dark" [class.slideIn]="!isCollapsed" [class.slideOut]="isCollapsed">
+    <div [collapse]="isCollapsed" id="navbarSupportedContent" class="collapse navbar-collapse bg-dark pb-5" [class.slideIn]="!isCollapsed" [class.slideOut]="isCollapsed">
       <div class="container">
       <ul class="navbar-nav text-center">
         <li class="nav-item">
