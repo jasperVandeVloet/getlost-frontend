@@ -1,3 +1,11 @@
+.btn-ham{
+  border:none;
+  background-color: rgba($color: $light, $alpha: .5);
+  border-radius: 100%;
+  width: 65px;
+  height: 65px;
+}
+
 .hamburger {
   width: 40px;
   height: 20px;
@@ -21,9 +29,10 @@
   transition: all 0.4s ease;
 }
 
-.hamburger.open span {
-  background: $light;
-}
+// .hamburger.open span {
+//   //background: $light;
+
+// }
 
 button:focus {
   outline: 0;
@@ -63,9 +72,7 @@ button:focus {
   left: -30px;
 }
 
-.btn-ham{
-  border:none;
-}
+
 
 .slideIn {
   animation-name: slide-in-top;

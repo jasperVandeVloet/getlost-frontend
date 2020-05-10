@@ -1,15 +1,32 @@
 <div class="walk" *ngIf="walk?.id; else loading">
-  <img src="{{ walk?.image.url }}" alt="{{ walk?.slug }}" class="w-100">
+  <div class="hero">
+    <img src="{{ walk?.image.url }}" alt="{{ walk?.slug }}" class="hero-img">
+  </div>
 
-  <div class="container">
-    <h3>{{ walk?.title }}</h3>
-    <h5 class="specs">
-      <i class="fas fa-baby-carriage pr-3" *ngIf="walk?.kids_friendly"></i>
-      <i class="fas fa-wheelchair  pr-3" *ngIf="walk?.wheelchair_friendly"></i>
-    </h5>
+  <button class="btn btn-primary btn-abs m-4 d-flex justify-content-center align-items-center"><i class="fas fa-arrow-left"></i></button>
 
-    <h4>Inleiding</h4>
-    <p>{{ walk?.description }}</p>
+  <div class="decorator">
+    <div class="container">
+      <h2 class="font-weight-bold">{{ walk?.title }}</h2>
+      <div class="border border-dark my-3"></div>
+
+      <h5 class="text-capitalize">provincie: {{ walk.province }}</h5>
+      <h5 class="text-capitalize">aantal checkpoints: {{ walk?.checkpoint.length }}</h5>
+
+      <div class="specs d-flex align-items-center">
+        <h5 class="m-0"><i class="fas fa-baby-carriage pr-3" *ngIf="walk.kids_friendly"></i></h5>
+        <h5 class="m-0"><i class="fas fa-wheelchair  pr-3" *ngIf="walk.wheelchair_friendly"></i></h5>
+        <app-difficulty-rating class="rating" [difficulty]="walk.difficulty"></app-difficulty-rating>
+      </div>
+      <div class="border border-dark my-3"></div>
+
+      <h4 class="font-weight-bold">Inleiding</h4>
+      <p>{{ walk?.description }}</p>
+
+      <div class="text-center">
+        <button class="btn btn-primary my-4 px-4 py-2"><i class="far fa-compass mr-2"></i>Begin te wandellen!</button>
+      </div>
+    </div>
   </div>
 </div>
 

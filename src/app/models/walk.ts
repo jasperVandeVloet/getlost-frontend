@@ -11,7 +11,7 @@ export interface Walk {
   wheelchair_friendly: boolean;
   difficulty?: number;
   description: string;
-  checkpoints: [
+  checkpoint: [
     {
       latitude: number;
       longitude: number;

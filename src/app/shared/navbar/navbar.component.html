@@ -1,6 +1,7 @@
 <div class="container">
   <nav class="navbar navbar-dark p-0 fixed-top justify-content-end" [ngClass]="{'bg-dark slideIn': !isCollapsed}">
-    <button class="navbar-toggler btn-ham p-4" type="button" (click)="isCollapsed = !isCollapsed"
+
+    <button class="navbar-toggler btn-ham m-4 d-flex justify-content-center" type="button" (click)="isCollapsed = !isCollapsed"
       [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
       <div class="hamburger" [ngClass]="{open: !isCollapsed}">
         <span></span>
