@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+
 import { ApiService } from 'src/app/service/api.service';
 import { Walk } from 'src/app/models/walk';
-import { Title } from '@angular/platform-browser';
+import { DeviceService } from 'src/app/service/device.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-walk',
@@ -11,16 +14,17 @@ import { Title } from '@angular/platform-browser';
   ]
 })
 export class WalkComponent implements OnInit {
+  public basePath = environment.frontendBasePath;
   public walk: Walk;
 
   constructor(
     private route: ActivatedRoute,
     private api: ApiService,
-    private titleService: Title
+    private titleService: Title,
+    private device: DeviceService,
   ) { }
 
   ngOnInit(): void {
-
     this.route.params.subscribe(params => {
      this.getWalk(params.slug);
     });
@@ -38,6 +42,16 @@ export class WalkComponent implements OnInit {
     });
   }
 
+  public deviceIsMobile(): boolean {
+    if (this.device.getBrowserData() !== undefined){
+      return this.device.getBrowserData().mobile;
+    }
+    return false;
+  }
 
+  public startWalking(): void {
+    // Save checkpoints to localStorage
+    localStorage.setItem('key', 'Value');
+  }
 
 }

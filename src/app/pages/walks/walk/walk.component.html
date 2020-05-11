@@ -3,8 +3,6 @@
     <img src="{{ walk?.image.url }}" alt="{{ walk?.slug }}" class="hero-img">
   </div>
 
-  <button class="btn btn-primary btn-abs m-4 d-flex justify-content-center align-items-center"><i class="fas fa-arrow-left"></i></button>
-
   <div class="decorator">
     <div class="container">
       <h2 class="font-weight-bold">{{ walk?.title }}</h2>
@@ -23,8 +21,29 @@
       <h4 class="font-weight-bold">Inleiding</h4>
       <p>{{ walk?.description }}</p>
 
+      <div class="disclaimer font-weight-bold" *ngIf="deviceIsMobile()">
+        <p>
+          Om de volledige ervaring van de wandeling te kunnen beleven zal er bij het begin de wandelling toestemming
+          tot je locatie en bewegingsensoren van je toestel worden gevraagt. We slagen ook enkele gegevens op in je
+          cache voor de voortgang van de wandeling.
+        </p>
+        <p>Dit wil niet zeggen dat we jou kunnen volgen of je gegevens doorverkopen of wat dan ook. Deze worden enkel
+          opgeslagen op jouw toestel. Niet op onze servers. Door verder te gaan, verkklaar je je hiermee akkoord</p>
+      </div>
+
+      <div class="disclaimer font-weight-bold" *ngIf="!deviceIsMobile()">
+        <p>
+          Scan onderstaande QR-code met je smartphone. Dit zal je doorverwijzen naar de wandelpagina op je smartphone.
+          Van hieruit kan je dan de wandeling starten
+        </p>
+      </div>
+
       <div class="text-center">
-        <button class="btn btn-primary my-4 px-4 py-2"><i class="far fa-compass mr-2"></i>Begin te wandellen!</button>
+
+        <button class="btn btn-primary my-4 px-4 py-2"><i class="far fa-compass mr-2" (click)="startWalking()"></i>Begin
+          te wandellen!</button>
+
+        <qrcode [level]="2" [qrvalue]="basePath + 'wandelingen/' + walk.slug" *ngIf="!deviceIsMobile()"></qrcode>
       </div>
     </div>
   </div>

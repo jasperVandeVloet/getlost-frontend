@@ -1,5 +1,7 @@
 html, body, .wrapper {
   height: 100%;
+  background-image: url('/assets/svg/topo.svg');
+  background-repeat: repeat;
 }
 .wrapper {
   display: flex;

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBasePath: 'https://getlost-backend.herokuapp.com/'
+  apiBasePath: 'https://getlost-backend.herokuapp.com/',
+  frontendBasePath: 'https://192.168.0.231:4200/',
 };
 
 /*
