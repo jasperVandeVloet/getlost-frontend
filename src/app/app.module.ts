@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -49,6 +50,7 @@ export function playerFactory() {
     AppRoutingModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
+    ModalModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     LottieModule.forRoot({ player: playerFactory }),
     HttpClientModule,

@@ -40,8 +40,9 @@
 
       <div class="text-center">
 
-        <button class="btn btn-primary my-4 px-4 py-2"><i class="far fa-compass mr-2" (click)="startWalking()"></i>Begin
-          te wandellen!</button>
+        <button class="btn btn-primary my-4 px-4 py-2" (click)="startWalking()">
+          <i class="far fa-compass mr-2"></i>Begin te wandellen!
+        </button>
 
         <qrcode [level]="2" [qrvalue]="basePath + 'wandelingen/' + walk.slug" *ngIf="!deviceIsMobile()"></qrcode>
       </div>
@@ -51,4 +52,16 @@
 
 <ng-template #loading>
   <app-loader></app-loader>
+</ng-template>
+
+<ng-template #confirmation>
+  <div class="modal-body py-5 text-center">
+    <h5>Je hebt onderstaande wandeling nog niet afgerond.</h5>
+    <p class="font-italic my-3">{{ getWalkFromStorage() }}</p>
+    <h5>Weet je zeker dat je een nieuwe wil starten?</h5>
+    <div class="text-right">
+      <button type="button" class="btn btn-primary mx-2 mt-4" (click)="confirm()">Ga verder</button>
+      <button type="button" class="btn btn-secondary mx-2 mt-4" (click)="decline()">Keer terug</button>
+    </div>
+  </div>
 </ng-template>
