@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
 
 import { DeviceService } from 'src/app/service/device.service';
 import { Coordinate } from 'src/app/models/coordinate';
 import { Checkpoint } from 'src/app/models/checkpoint';
 import { CheckpointModalComponent } from 'src/app/components/checkpoint-modal/checkpoint-modal.component';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-navigation',
@@ -31,12 +32,18 @@ export class NavigationComponent implements OnInit {
 
   constructor(
     private device: DeviceService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
     this.getDataFromStorage();
     this.getDataFromDevice();
+    this.setWindow('Get Lost - Ergens onderweg');
+  }
+
+  protected setWindow(newTitle: string) {
+    this.titleService.setTitle(newTitle);
   }
 
   /**
@@ -56,13 +63,25 @@ export class NavigationComponent implements OnInit {
    * So first checkpoint get set.
    * If current is already set, this means a user was walking and is now returning, so we go further from current.
    */
-  protected setCurrentCheckpoint(): void {
-    if (localStorage.getItem('current') === null) {
-      localStorage.setItem('current', JSON.stringify(this.checkpoints[0]));
+  protected setCurrentCheckpoint(atCheckpoint?: boolean): void {
+    if (localStorage.getItem('current') === null || localStorage.getItem('current') === undefined ) {
+      this.currentCheckpoint = 0;
+      // localStorage.setItem('current', this.currentCheckpoint.toString());
+    }
+    else if (atCheckpoint) {
+      this.currentCheckpoint += 1;
     }
 
-    this.destination = JSON.parse(localStorage.getItem('current'));
-    this.currentCheckpoint = this.checkpoints.findIndex((checkpoint) => checkpoint.id === this.destination.id);
+    if (this.currentCheckpoint < this.checkpoints.length) {
+      console.log('kleiner dan');
+      localStorage.setItem('current', this.currentCheckpoint.toString());
+      this.destination = this.checkpoints[this.currentCheckpoint];
+      console.log('NavigationComponent -> setCurrentCheckpoint -> this.checkpoints.length', this.currentCheckpoint, '/',this.checkpoints.length);
+    }
+    else {
+      console.log(this.currentCheckpoint, '/',this.checkpoints.length);
+    }
+
   }
 
   /**
@@ -290,7 +309,8 @@ export class NavigationComponent implements OnInit {
       checkpoint: this.checkpoints[this.currentCheckpoint],
       title: this.walkTitle
     };
-    this.bsModalRef = this.modalService.show(CheckpointModalComponent, {initialState});
+    this.bsModalRef = this.modalService.show(CheckpointModalComponent, { initialState, class: 'modal-dialog-centered', animated: true });
+    this.modalService.onHide.subscribe((reason) => this.setCurrentCheckpoint(true));
   }
 
   /**
@@ -300,6 +320,11 @@ export class NavigationComponent implements OnInit {
     let tempnum = num * Math.pow(10, prec);
     tempnum = Math.floor(tempnum);
     return tempnum / Math.pow(10, prec);
+  }
+
+  // FOR DEBUGGING ONLY!
+  public clearStorage() {
+    localStorage.setItem('current', '0');
   }
 
 }

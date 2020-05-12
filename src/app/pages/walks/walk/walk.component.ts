@@ -69,7 +69,7 @@ export class WalkComponent implements OnInit {
   }
 
   protected openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, { class: 'modal-dialog-centered' });
+    this.modalRef = this.modalService.show(template, { class: 'modal-dialog-centered', animated: true });
   }
 
   public getWalkFromStorage(): string {

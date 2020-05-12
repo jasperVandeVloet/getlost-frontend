@@ -5,18 +5,20 @@
     <div class="row mt-5">
       <aside class="col-12 col-md-4 mb-4 mb-md-0">
         <button class="btn btn-primary d-block d-md-none mb-3" type="button" (click)="isCollapsed = !isCollapsed"
-        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseFilter">
-          <i class="fas fa-sliders-h"></i><span class="ml-2">Filters</span>
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseFilter">
+          <i class="fas fa-filter"></i><span class="ml-2">Filters</span>
         </button>
 
         <div class="filter p-4" id="collapseFilter" [collapse]="isCollapsed" [isAnimated]="true">
-          <h4 class="text-uppercase mb-4 text-primary d-none d-md-block"><i class="fas fa-sliders-h"></i><span class="ml-2">Filters</span>
+          <h4 class="text-uppercase mb-4 text-primary d-none d-md-block"><i class="fas fa-sliders-h"></i><span
+              class="ml-2">Filters</span>
           </h4>
           <form [formGroup]="filterForm">
             <div class="form-group mb-4">
               <p class="mb-2 text-uppercase font-weight-bold">Provincie:</p>
               <div class="form-check align-items-start mb-1" *ngFor="let item of provinces">
-                <input class="form-check-input mt-1" type="checkbox" id="{{item}}" (change)="changeProvince($event, item)">
+                <input class="form-check-input mt-1" type="checkbox" id="{{item}}"
+                  (change)="changeProvince($event, item)">
                 <label class="form-check-label text-capitalize" for="{{item}}">{{ item }}</label>
               </div>
             </div>
@@ -24,23 +26,27 @@
             <div class="form-group mb-4">
               <label for="difficulty" class="font-weight-bold text-uppercase"> Moeilijkheid: </label>
               <div class="custom-slider">
-                <ng5-slider [options]="sliderOptions" formControlName="difficulty" (mouseup)="changeDifficulty($event)"></ng5-slider>
+                <ng5-slider [options]="sliderOptions" formControlName="difficulty" (mouseup)="changeDifficulty($event)">
+                </ng5-slider>
               </div>
             </div>
 
             <div class="form-group mb-4">
               <p class="font-weight-bold text-uppercase mb-2">Geschikt voor:</p>
               <div class="form-check form-check-inline align-items-start mb-1">
-                <input class="form-check-input mt-1" type="checkbox" id="kids_friendly" formControlName="kids_friendly" (change)="onToggle($event)">
+                <input class="form-check-input mt-1" type="checkbox" id="kids_friendly" formControlName="kids_friendly"
+                  (change)="onToggle($event)">
                 <label class="form-check-label" for="kids_friendly">Kinderen (0-12 jaar)</label>
               </div>
               <div class="form-check form-check-inline align-items-start mb-1">
-                <input class="form-check-input mt-1" type="checkbox" id="wheelchair_friendly" formControlName="wheelchair_friendly" (change)="onToggle($event)">
+                <input class="form-check-input mt-1" type="checkbox" id="wheelchair_friendly"
+                  formControlName="wheelchair_friendly" (change)="onToggle($event)">
                 <label class="form-check-label" for="wheelchair_friendly">Toegankelijk met rolstoelen</label>
               </div>
             </div>
 
-            <button class="btn btn-block btn-outline-primary mt-5" type="reset" (click)="resetFilter(initialFilter)">Wis alle filters</button>
+            <button class="btn btn-block btn-outline-primary mt-5" type="reset" (click)="resetFilter(initialFilter)">Wis
+              alle filters</button>
           </form>
         </div>
       </aside>

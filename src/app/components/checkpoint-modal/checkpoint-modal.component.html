@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h5 class="modal-title mx-auto">{{title}}</h5>
+  <h5 class="modal-title mx-auto font-weight-bold">{{title}}</h5>
 </div>
 <img src="{{ checkpoint.img.url }}" alt="{{ checkpoint.img.name }}" class="w-100">
 <div class="modal-body">
@@ -8,5 +8,5 @@
 
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">close</button>
+  <button type="button" class="btn btn-primary mx-auto" (click)="bsModalRef.hide()"><i class="far fa-compass mr-2"></i>Op naar het volgende punt</button>
 </div>
