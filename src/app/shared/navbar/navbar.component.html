@@ -1,31 +1,39 @@
-<div class="container">
-  <nav class="navbar navbar-dark p-0 fixed-top justify-content-end" [ngClass]="{'bg-dark slideIn': !isCollapsed}">
+<div class="navbar-comp">
+  <div class="bg-blur fixed-top">
+    <div class="container">
+      <nav class="navbar" [ngClass]="{'bg-dark slideIn': !isCollapsed}">
+        <a class="navbar-brand" href="/">
+          <img src="/assets/svg/logo-big.svg" alt="Get Lost logo" class="logo">
+        </a>
+        <button class="navbar-toggler btn-ham d-flex justify-content-center btn-primary" type="button"
+          (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+          <div class="hamburger" [ngClass]="{open: !isCollapsed}">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
 
-    <button class="navbar-toggler btn-ham m-4 d-flex justify-content-center btn-primary" type="button" (click)="isCollapsed = !isCollapsed"
-      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
-      <div class="hamburger" [ngClass]="{open: !isCollapsed}">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </button>
-
-    <div [collapse]="isCollapsed" id="navbarSupportedContent" class="collapse navbar-collapse bg-dark pb-5" [class.slideIn]="!isCollapsed" [class.slideOut]="isCollapsed">
-      <div class="container">
-      <ul class="navbar-nav text-center">
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/" (click)="isCollapsed = !isCollapsed">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/wandelingen"
-            (click)="isCollapsed = !isCollapsed">Ontdek</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/hoe-werkt-het"
-            (click)="isCollapsed = !isCollapsed">Hoe werkt het?</a>
-        </li>
-      </ul>
-      </div>
+        <div [collapse]="isCollapsed" id="navbarSupportedContent" class="collapse navbar-collapse bg-dark pb-5"
+          [class.slideIn]="!isCollapsed" [class.slideOut]="isCollapsed">
+          <div class="container">
+            <ul class="navbar-nav text-center">
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/"
+                  (click)="isCollapsed = !isCollapsed">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/wandelingen"
+                  (click)="isCollapsed = !isCollapsed">Ontdek</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="/hoe-werkt-het"
+                  (click)="isCollapsed = !isCollapsed">Hoe werkt het?</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
-  </nav>
+  </div>
 </div>
