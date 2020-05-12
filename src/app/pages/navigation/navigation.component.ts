@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
 import { DeviceService } from 'src/app/service/device.service';
 import { Coordinate } from 'src/app/models/coordinate';
 import { Checkpoint } from 'src/app/models/checkpoint';
+import { CheckpointModalComponent } from 'src/app/components/checkpoint-modal/checkpoint-modal.component';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html'
 })
 export class NavigationComponent implements OnInit {
+  protected bsModalRef: BsModalRef;
   protected optionsHighAccuracy = { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true };
   protected optionsLowAccuracy = { maximumAge: 600000, timeout: 10000, enableHighAccuracy: false };
+  protected fenceRadius = 10; // radius of how close to get to checkpoint in m.
 
   public checkpoints: Checkpoint[];
   public destinationAngle = 0;
@@ -17,18 +22,16 @@ export class NavigationComponent implements OnInit {
   public destination: Checkpoint;
   public distance: number;
   public walkTitle: string;
-
+  public currentCheckpoint = 0;
 
   // DEBUGGING VARIABLES
   public distanceAccuracy;
   public angleAccuracy;
   public error;
 
-  // TEMP
-  public currentCheckpoint = 100; // CHANGE
-
   constructor(
-    private device: DeviceService
+    private device: DeviceService,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +39,10 @@ export class NavigationComponent implements OnInit {
     this.getDataFromDevice();
   }
 
+  /**
+   * Chosen route is stored in localStorage.
+   * So user can use phone for other purpose and return to walking when needed.
+   */
   protected getDataFromStorage(): void {
     this.walkTitle = localStorage.getItem('walk');
     this.checkpoints = JSON.parse(localStorage.getItem('checkpoints'));
@@ -44,6 +51,11 @@ export class NavigationComponent implements OnInit {
     this.setCurrentCheckpoint();
   }
 
+  /**
+   * If current is not set in localStorage this means a new walk is started
+   * So first checkpoint get set.
+   * If current is already set, this means a user was walking and is now returning, so we go further from current.
+   */
   protected setCurrentCheckpoint(): void {
     if (localStorage.getItem('current') === null) {
       localStorage.setItem('current', JSON.stringify(this.checkpoints[0]));
@@ -53,6 +65,9 @@ export class NavigationComponent implements OnInit {
     this.currentCheckpoint = this.checkpoints.findIndex((checkpoint) => checkpoint.id === this.destination.id);
   }
 
+  /**
+   * Access device properties to get geolocation and orientation.
+   */
   protected getDataFromDevice(): void {
     // if (this.device.getBrowserData().mobile === true) {
     if (this.device.hasLocation()) {
@@ -101,8 +116,9 @@ export class NavigationComponent implements OnInit {
       this.error = 'No destination set.';
     }
 
-
-    // this.checker = this.validateDistance(this.distance, this.fenceRadius);
+    if (this.distance < this.fenceRadius) {
+      this.arrivedAtCheckpoint();
+    }
     // this.setArrowAngle();
   }
 
@@ -265,6 +281,17 @@ export class NavigationComponent implements OnInit {
     this.destinationAngle = alpha;
   }
 
+  public arrivedAtCheckpoint(): void {
+    this.openModalWithComponent();
+  }
+
+  protected openModalWithComponent() {
+    const initialState = {
+      checkpoint: this.checkpoints[this.currentCheckpoint],
+      title: this.walkTitle
+    };
+    this.bsModalRef = this.modalService.show(CheckpointModalComponent, {initialState});
+  }
 
   /**
    * Round to specific precision after point

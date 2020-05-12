@@ -15,6 +15,7 @@ import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { Ng5SliderModule } from 'ng5-slider';
 import { AnQrcodeModule } from 'an-qrcode';
+import { ShowdownModule } from 'ngx-showdown';
 
 import { environment } from '../environments/environment';
 import { HomeComponent } from './pages/home/home.component';
@@ -26,6 +27,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { DifficultyRatingComponent } from './components/difficulty-rating/difficulty-rating.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
+import { CheckpointModalComponent } from './components/checkpoint-modal/checkpoint-modal.component';
 
 // Note we need a separate function as it's required
 // by the AOT compiler. Lottie
@@ -45,6 +47,7 @@ export function playerFactory() {
     LoaderComponent,
     DifficultyRatingComponent,
     NavigationComponent,
+    CheckpointModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ export function playerFactory() {
     HttpClientModule,
     ReactiveFormsModule,
     Ng5SliderModule,
-    AnQrcodeModule
+    AnQrcodeModule,
+    ShowdownModule
   ],
   providers: [
     Title

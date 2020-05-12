@@ -1,0 +1,12 @@
+<div class="modal-header">
+  <h5 class="modal-title mx-auto">{{title}}</h5>
+</div>
+<img src="{{ checkpoint.img.url }}" alt="{{ checkpoint.img.name }}" class="w-100">
+<div class="modal-body">
+  <h5 class="font-weight-bold ">{{ checkpoint.title }}</h5>
+  <showdown [value]="checkpoint.description" class="w-100"></showdown>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">close</button>
+</div>

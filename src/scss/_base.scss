@@ -1,6 +1,14 @@
 html, body, .wrapper {
   height: 100%;
+}
+
+html, body, .wrapper, .topo-light {
   background-image: url('/assets/svg/topo.svg');
+  background-repeat: repeat;
+}
+
+.topo-dark, .modal-backdrop {
+  background-image: url('/assets/svg/topo-dark.svg');
   background-repeat: repeat;
 }
 .wrapper {
@@ -48,3 +56,10 @@ ul {
 //   border-radius: 10px 10px 50px 10px;
 // }
 
+showdown {
+  img {
+    width: 100%;
+    margin: 1em 0;
+    border-radius: $border-radius-left;
+  }
+}
