@@ -8,19 +8,28 @@
     </div>
 
     <div class="data">
-      <div class="distance mb-5">
-        <h1>265m</h1>
+      <div class="distance">
+        <h1>{{ distance }}m</h1>
         <h2 class="text-uppercase">tot checkpoint</h2>
+        <p class="text-center text-uppercase mb-1 small">{{ walkTitle }}</p>
       </div>
 
-      <progressbar [max]="totalCheckpoints" [value]="currentCheckpoint">
-        <span class="text-nowrap">{{currentCheckpoint}} / {{totalCheckpoints}}</span>
+      <progressbar [max]="checkpoints.length" [value]="currentCheckpoint">
+        <span class="text-nowrap">{{currentCheckpoint}} / {{ checkpoints.length }}</span>
       </progressbar>
-
-      <p>Debugging</p>
-      <p>{{ currentLocation.latitude }}, {{ currentLocation.longitude }}</p>
     </div>
   </div>
 
-
+  <div class="debug small p-1">
+    <p>Debugging</p>
+    <p>current location:</p>
+    <p>{{ currentLocation?.latitude }}, {{ currentLocation?.longitude }}</p>
+    <p>destination:</p>
+    <p>{{ destination.coordinate?.latitude }}, {{ destination.coordinate?.longitude }}</p>
+    <p>location accuracy:</p>
+    <p>{{ distanceAccuracy }}m</p>
+    <p>angle accuracy:</p>
+    <p>{{ angleAccuracy }}°</p>
+    <p>{{ error }}</p>
+  </div>
 </div>

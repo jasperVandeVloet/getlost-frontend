@@ -90,8 +90,7 @@ export class WalkComponent implements OnInit {
 
   protected saveToStorageAndGo(): void {
     // Start new walk
-    localStorage.removeItem('walk');
-    localStorage.removeItem('checkpoints');
+    localStorage.clear();
 
     localStorage.setItem('walk', this.walk.title);
     localStorage.setItem('checkpoints', JSON.stringify(this.walk.checkpoint));

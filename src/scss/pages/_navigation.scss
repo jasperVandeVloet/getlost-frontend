@@ -38,7 +38,7 @@
     margin: auto;
 
     h1{
-      font-size: 5rem;
+      font-size: 4rem;
       font-weight: bold;
       line-height: 2.5rem;
     }
@@ -50,6 +50,16 @@
       .progress-bar {
         background-color: $primary;
       }
+    }
+  }
+
+  .debug {
+    position: absolute;
+    z-index: 99;
+    top: 20%;
+
+    p {
+      margin: 0;
     }
   }
 }

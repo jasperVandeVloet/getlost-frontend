@@ -1,3 +1,5 @@
+import { Checkpoint } from './checkpoint';
+
 export interface Walk {
   id: number;
   slug: string;
@@ -11,14 +13,7 @@ export interface Walk {
   wheelchair_friendly: boolean;
   difficulty?: number;
   description: string;
-  checkpoint: [
-    {
-      latitude: number;
-      longitude: number;
-      title: string;
-      description?: string;
-    }
-  ];
+  checkpoint: Checkpoint[];
   image: {
     name: string;
     url: string;

@@ -1,31 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService } from 'src/app/service/device.service';
 import { Coordinate } from 'src/app/models/coordinate';
+import { Checkpoint } from 'src/app/models/checkpoint';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html'
 })
 export class NavigationComponent implements OnInit {
-  public destinationAngle = 0;
-
   protected optionsHighAccuracy = { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true };
   protected optionsLowAccuracy = { maximumAge: 600000, timeout: 10000, enableHighAccuracy: false };
 
-  public currentLocation: Coordinate = {
-    latitude:  0,
-    longitude: 0
-  };
-
-  public destination: Coordinate;
+  public checkpoints: Checkpoint[];
+  public destinationAngle = 0;
+  public currentLocation: Coordinate = { latitude: 0, longitude: 0 };
+  public destination: Checkpoint;
   public distance: number;
+  public walkTitle: string;
+
 
   // DEBUGGING VARIABLES
   public distanceAccuracy;
+  public angleAccuracy;
   public error;
 
   // TEMP
-  public totalCheckpoints = 200; // CHANGE
   public currentCheckpoint = 100; // CHANGE
 
   constructor(
@@ -33,10 +32,33 @@ export class NavigationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getDataFromStorage();
+    this.getDataFromDevice();
+  }
+
+  protected getDataFromStorage(): void {
+    this.walkTitle = localStorage.getItem('walk');
+    this.checkpoints = JSON.parse(localStorage.getItem('checkpoints'));
+    console.log('NavigationComponent -> getDataFromStorage -> this.checkpoints', this.checkpoints);
+
+    this.setCurrentCheckpoint();
+  }
+
+  protected setCurrentCheckpoint(): void {
+    if (localStorage.getItem('current') === null) {
+      localStorage.setItem('current', JSON.stringify(this.checkpoints[0]));
+    }
+
+    this.destination = JSON.parse(localStorage.getItem('current'));
+    this.currentCheckpoint = this.checkpoints.findIndex((checkpoint) => checkpoint.id === this.destination.id);
+  }
+
+  protected getDataFromDevice(): void {
     // if (this.device.getBrowserData().mobile === true) {
     if (this.device.hasLocation()) {
       if (this.device.hasOrientation()) {
         this.getGeolocation();
+        this.getOrientation();
       } else {
         alert('Device Orientation API not supported.');
       }
@@ -47,9 +69,13 @@ export class NavigationComponent implements OnInit {
     // else {
     //   alert('Please use your phone');
     // }
-
   }
 
+  /**
+   * Get geolocation, when geo changes get new location (watch)
+   * First try to get location with high accuracy,
+   * If high accuary takes to long, switch to low accuracy
+   */
   public getGeolocation(): void {
     console.log('getGeoLocation()');
     navigator.geolocation.watchPosition(
@@ -58,18 +84,31 @@ export class NavigationComponent implements OnInit {
       this.optionsHighAccuracy);
   }
 
-  protected successCallback(position) {
+  /**
+   * This function is called when navigator.geolocation.watchPosition is succes
+   */
+  protected successCallback(position): void {
     this.currentLocation.latitude = this.roundUsing(position.coords.latitude, 6);
     this.currentLocation.longitude = this.roundUsing(position.coords.longitude, 6);
-    console.log('NavigationComponent -> successCallback -> this.currentLocation', this.currentLocation);
 
+    // NEEDED OR ONLY DEBUGGING?
     this.distanceAccuracy = Math.floor(position.coords.accuracy);
-    // this.distance = this.calculateDistance(this.currentLocation, this.destination);
+
+    if (this.destination.coordinate !== undefined) {
+      this.distance = this.calculateDistance(this.currentLocation, this.destination.coordinate);
+    }
+    else {
+      this.error = 'No destination set.';
+    }
+
 
     // this.checker = this.validateDistance(this.distance, this.fenceRadius);
     // this.setArrowAngle();
   }
 
+  /**
+   * This function is called when navigator.geolocation.watchPosition throw error in high accuracy
+   */
   protected errorCallback_highAccuracy(error): void {
     console.log('NavigationComponent -> errorCallback_highAccuracy -> error', error);
     if (error.code === error.TIMEOUT) {
@@ -84,6 +123,10 @@ export class NavigationComponent implements OnInit {
     this.errorCallback(error, '(high accuracy attempt)');
   }
 
+  /**
+   * This function is called when navigator.geolocation.watchPosition throw error in high accuracy and low accuracy
+   * Used to format the error msg
+   */
   protected errorCallback(error, type?: string): void {
     console.log('NavigationComponent -> errorCallback -> error', error);
     let msg = `Can't get your location ${type}. Error = `;
@@ -102,10 +145,130 @@ export class NavigationComponent implements OnInit {
     }
 
     msg += ', ' + error.message;
-    alert(msg);
     this.error = msg;
   }
 
+  /**
+   * Calculate distance from current location to checkpoint
+   * Resource: http://www.movable-type.co.uk/scripts/latlong.html
+   */
+  protected calculateDistance(currentLocation: Coordinate, destination: Coordinate) {
+    const R = 63710; // earthRadius in km
+    const dLat = (destination.latitude - currentLocation.latitude) * Math.PI / 180;
+    const dLng = (destination.longitude - currentLocation.longitude) * Math.PI / 180;
+
+    const a =
+      0.5 - Math.cos(dLat) / 2 +
+      Math.cos(currentLocation.latitude * Math.PI / 180) * Math.cos(destination.latitude * Math.PI / 180) *
+      (1 - Math.cos(dLng)) / 2;
+
+    const result = R * 2 * Math.asin(Math.sqrt(a)) * 100;
+
+    return Math.floor(result);
+  }
+
+  /**
+   * Ask acces to device orientation and motion events
+   * iOS 13+ has permission API to gain acces
+   */
+  public getOrientation(): void {
+    if (typeof DeviceMotionEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then(response => {
+          if (response === 'granted') {
+            window.addEventListener('deviceorientation', (e) => {
+              this.handleOrientation(e);
+            });
+          } else {
+            const msg = 'No access to device orientation' + response;
+            alert(msg);
+          }
+        })
+        .catch((error) => alert(error));
+    } else { // Android && iOS <13
+      window.addEventListener('deviceorientation', (e) => {
+        this.handleOrientation(e);
+      }, true);
+    }
+  }
+
+  /**
+   * When device oriantation is granted orientation can be caught from event
+   * Android uses e.absolute
+   * iOS uses e.webkitCompassHeading
+   */
+  public handleOrientation(e): void {
+    let deviceAngle: number;
+    if (this.device.getOsData().os === 'Android' && e.absolute) {
+      deviceAngle = Math.floor(e.alpha);
+    } else if (this.device.getOsData().os === 'iOS' && e.webkitCompassHeading) {
+      this.angleAccuracy = Math.floor(e.webkitCompassAccuracy);
+      deviceAngle = Math.floor(e.webkitCompassHeading);
+    }
+
+    this.setArrowAngle(deviceAngle);
+  }
+
+  /**
+   * Calculate angle against north,
+   * manipulate this so it matches to device position
+   */
+  public setArrowAngle(deviceAngle): void {
+    const begin: Coordinate = this.currentLocation;
+    const endY: Coordinate = {
+      latitude: this.destination.coordinate.latitude,
+      longitude: begin.longitude
+    };
+    const endX: Coordinate = {
+      latitude: begin.latitude,
+      longitude: this.destination.coordinate.longitude
+    };
+
+    // calcuate distance for y-axis
+    let y = this.calculateDistance(begin, endY);
+    if (begin.latitude > this.destination.coordinate.latitude) {
+      y *= -1;
+    }
+
+    // calcuate distance for x-axis
+    let x = this.calculateDistance(begin, endX);
+    if (begin.longitude > this.destination.coordinate.longitude) {
+      x *= -1;
+    }
+
+    // calculate alpha (angle for compass)
+    let alpha = Math.acos(y / this.distance) * (180 / Math.PI);
+
+    if (x < 0) {
+      alpha = 360 - alpha;
+    }
+
+    // Android angle is clockwise, iOs uses angle counter clockwise
+    if (this.device.getOsData().os === 'Android') {
+      alpha = Math.floor(alpha + deviceAngle);
+    }
+    else if (this.device.getOsData().os === 'iOS') {
+      alpha = Math.floor(alpha - deviceAngle);
+    }
+    else {
+      alpha = 0;
+      this.error = 'Something went wrong calculating the angle';
+    }
+
+    if (alpha < 0) {
+      alpha += 360;
+    }
+    if (alpha > 360) {
+      alpha -= 360;
+    }
+
+    this.destinationAngle = alpha;
+  }
+
+
+  /**
+   * Round to specific precision after point
+   */
   protected roundUsing(num, prec) {
     let tempnum = num * Math.pow(10, prec);
     tempnum = Math.floor(tempnum);
