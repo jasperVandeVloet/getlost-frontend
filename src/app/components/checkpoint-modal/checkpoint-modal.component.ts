@@ -13,7 +13,7 @@ export class CheckpointModalComponent implements OnInit {
   constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
-    console.log(this.checkpoint);
+    console.log('MODAL OPEN');
   }
 
 }

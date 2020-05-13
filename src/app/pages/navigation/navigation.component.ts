@@ -6,6 +6,7 @@ import { Coordinate } from 'src/app/models/coordinate';
 import { Checkpoint } from 'src/app/models/checkpoint';
 import { CheckpointModalComponent } from 'src/app/components/checkpoint-modal/checkpoint-modal.component';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -33,7 +34,8 @@ export class NavigationComponent implements OnInit {
   constructor(
     private device: DeviceService,
     private modalService: BsModalService,
-    private titleService: Title
+    private titleService: Title,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -55,6 +57,7 @@ export class NavigationComponent implements OnInit {
     this.checkpoints = JSON.parse(localStorage.getItem('checkpoints'));
     console.log('NavigationComponent -> getDataFromStorage -> this.checkpoints', this.checkpoints);
 
+    console.log('NavigationComponent -> getDataFromStorage )', localStorage.getItem('current'));
     this.setCurrentCheckpoint();
   }
 
@@ -64,22 +67,37 @@ export class NavigationComponent implements OnInit {
    * If current is already set, this means a user was walking and is now returning, so we go further from current.
    */
   protected setCurrentCheckpoint(atCheckpoint?: boolean): void {
-    if (localStorage.getItem('current') === null || localStorage.getItem('current') === undefined ) {
+    if (localStorage.getItem('current') === null ) {
+      console.log('INITIALIZE CURRENT (should be 0)', this.currentCheckpoint);
       this.currentCheckpoint = 0;
-      // localStorage.setItem('current', this.currentCheckpoint.toString());
+
+      console.log('SET CHECKPOINT TO LOCALSTORAGE PRE', localStorage.getItem('current'));
+      localStorage.setItem('current', this.currentCheckpoint.toString());
+      console.log('SET CHECKPOINT TO LOCALSTORAGE POST', localStorage.getItem('current'));
     }
     else if (atCheckpoint) {
-      this.currentCheckpoint += 1;
+      console.log('CURRENT ++ PRE', this.currentCheckpoint);
+      this.currentCheckpoint ++;
+      console.log('CURRENT ++ POST', this.currentCheckpoint);
+
+      console.log('SET CHECKPOINT TO LOCALSTORAGE PRE', localStorage.getItem('current'));
+      localStorage.setItem('current', this.currentCheckpoint.toString());
+      console.log('SET CHECKPOINT TO LOCALSTORAGE POST', localStorage.getItem('current'));
+    }
+    else  {
+      this.currentCheckpoint = parseInt(localStorage.getItem('current'), 10);
     }
 
     if (this.currentCheckpoint < this.checkpoints.length) {
-      console.log('kleiner dan');
-      localStorage.setItem('current', this.currentCheckpoint.toString());
+      console.log(this.currentCheckpoint, 'kleiner dan', this.checkpoints.length);
       this.destination = this.checkpoints[this.currentCheckpoint];
-      console.log('NavigationComponent -> setCurrentCheckpoint -> this.checkpoints.length', this.currentCheckpoint, '/',this.checkpoints.length);
+      console.log('NIEUWE CHECKPOINT GEKOZEN = ', this.checkpoints[this.currentCheckpoint].title);
     }
-    else {
-      console.log(this.currentCheckpoint, '/',this.checkpoints.length);
+    else if (this.currentCheckpoint >=  this.checkpoints.length){
+      console.log('FINISH', this.currentCheckpoint, '/', this.checkpoints.length);
+      alert('FINISH!!!!');
+      localStorage.clear();
+      this.router.navigate(['/']);
     }
 
   }
@@ -111,7 +129,6 @@ export class NavigationComponent implements OnInit {
    * If high accuary takes to long, switch to low accuracy
    */
   public getGeolocation(): void {
-    console.log('getGeoLocation()');
     navigator.geolocation.watchPosition(
       (position) => this.successCallback(position),
       (error) => this.errorCallback_highAccuracy(error),
@@ -302,6 +319,8 @@ export class NavigationComponent implements OnInit {
 
   public arrivedAtCheckpoint(): void {
     this.openModalWithComponent();
+    this.setCurrentCheckpoint(true);
+    console.log('* AT CHECKPOINT set to next* current = ', this.currentCheckpoint);
   }
 
   protected openModalWithComponent() {
@@ -310,7 +329,6 @@ export class NavigationComponent implements OnInit {
       title: this.walkTitle
     };
     this.bsModalRef = this.modalService.show(CheckpointModalComponent, { initialState, class: 'modal-dialog-centered', animated: true });
-    this.modalService.onHide.subscribe((reason) => this.setCurrentCheckpoint(true));
   }
 
   /**
@@ -324,7 +342,8 @@ export class NavigationComponent implements OnInit {
 
   // FOR DEBUGGING ONLY!
   public clearStorage() {
-    localStorage.setItem('current', '0');
+    localStorage.removeItem('current');
+    this.setCurrentCheckpoint();
   }
 
 }

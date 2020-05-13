@@ -12,7 +12,7 @@ export class LoaderComponent implements OnInit {
     // path: 'https://assets3.lottiefiles.com/packages/lf20_ZWEJL5.json',
     path: '/assets/json/loading.json',
     autoplay: true,
-    loop: false
+    loop: true
   };
   constructor() { }
 
