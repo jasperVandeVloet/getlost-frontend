@@ -11,23 +11,23 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+// platformBrowserDynamic().bootstrapModule(AppModule)
+//   .catch(err => console.error(err));
 
 // loading element container to transition
-// const loadingElement = document.querySelector('.app-loading');
+const loadingElement = document.querySelector('.app-loading');
 
-// platformBrowserDynamic()
-//   .bootstrapModule(AppModule)
-//   .then(() => {
-//     loadingElement.classList.add('loaded');
-//     lottie.loadAnimation({
-//       container: document.getElementById('lottie'),
-//       renderer: 'svg',
-//       loop: true,
-//       autoplay: true,
-//       path: '/assets/json/loading.json'
-//     });
-//   })
-//   .then(() => setTimeout(() => loadingElement.remove(), 4000))
-//   .catch(err => console.error(err));
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .then(() => {
+    loadingElement.classList.add('loaded');
+    lottie.loadAnimation({
+      container: document.getElementById('lottie'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: '/assets/json/loading.json'
+    });
+  })
+  .then(() => setTimeout(() => loadingElement.remove(), 4000))
+  .catch(err => console.error(err));
