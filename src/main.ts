@@ -29,5 +29,5 @@ platformBrowserDynamic()
       path: '/assets/json/loading.json'
     });
   })
-  .then(() => setTimeout(() => loadingElement.remove(), 4000))
+  .then(() => setTimeout(() => loadingElement.remove(), 2000))
   .catch(err => console.error(err));

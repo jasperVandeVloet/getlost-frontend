@@ -6,12 +6,14 @@
       <aside class="col-12 col-md-4 mb-4 mb-md-0">
         <button class="btn btn-primary d-block d-md-none mb-3" type="button" (click)="isCollapsed = !isCollapsed"
           [attr.aria-expanded]="!isCollapsed" aria-controls="collapseFilter">
-          <i class="fas fa-filter"></i><span class="ml-2">Filters</span>
+          <i class="fas fa-filter"></i>
+          <span class="ml-2">Filters</span>
         </button>
 
         <div class="filter p-4" id="collapseFilter" [collapse]="isCollapsed" [isAnimated]="true">
-          <h4 class="text-uppercase mb-4 text-primary d-none d-md-block"><i class="fas fa-sliders-h"></i><span
-              class="ml-2">Filters</span>
+          <h4 class="text-uppercase mb-4 text-primary d-none d-md-block">
+            <i class="fas fa-filter"></i>
+            <span class="ml-2">Filters</span>
           </h4>
           <form [formGroup]="filterForm">
             <div class="form-group mb-4">

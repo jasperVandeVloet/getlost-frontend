@@ -1,39 +1,38 @@
 <div class="navbar-comp">
-  <div class="fixed-top">
-    <div class="container">
-      <nav class="navbar" [ngClass]="{'bg-dark slideIn': !isCollapsed}">
-        <a class="navbar-brand" href="/">
-          <img src="/assets/logo/logo-big.png" alt="Get Lost logo" class="logo">
-        </a>
-        <button class="navbar-toggler btn-ham d-flex justify-content-center btn-primary" type="button"
-          (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
-          <div class="hamburger" [ngClass]="{open: !isCollapsed}">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
-
-        <div [collapse]="isCollapsed" id="navbarSupportedContent" class="collapse navbar-collapse bg-dark pb-5"
-          [class.slideIn]="!isCollapsed" [class.slideOut]="isCollapsed">
-          <div class="container">
-            <ul class="navbar-nav text-center">
-              <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/"
-                  (click)="isCollapsed = !isCollapsed">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" routerLink="/wandelingen"
-                  (click)="isCollapsed = !isCollapsed">Ontdek</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLinkActive="active" routerLink="/hoe-werkt-het"
-                  (click)="isCollapsed = !isCollapsed">Hoe werkt het?</a>
-              </li>
-            </ul>
-          </div>
+  <nav class="navbar fixed-top">
+    <div class="container d-flex justify-content-end">
+      <button class="btn btn-link navbar-toggler mt-4 mb-2" type="button" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+        <div class="hamburger" [ngClass]="{open: !isCollapsed}">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="circle"></span>
         </div>
-      </nav>
+      </button>
     </div>
-  </div>
+    <div [collapse]="isCollapsed" [isAnimated]="true" class="menu collapse" [class.slideIn]="!isCollapsed"
+      [class.slideOut]="isCollapsed">
+      <div class="navbar-nav">
+      <img src="/assets/logo/logo-light.png" alt="" class="logo">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/"
+            (click)="isCollapsed = !isCollapsed">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/wandelingen"
+            (click)="isCollapsed = !isCollapsed">Ontdek</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/hoe-werkt-het"
+            (click)="isCollapsed = !isCollapsed">Hoe werkt het?</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+
+  </nav>
+
+
 </div>

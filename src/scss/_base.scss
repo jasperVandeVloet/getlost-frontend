@@ -10,6 +10,7 @@ html, body, .wrapper, .topo-light, .modal-content {
 .topo-dark, .modal-backdrop {
   background-image: url('/assets/svg/topo-dark.svg');
   background-repeat: repeat;
+  background-color: $dark
 }
 .wrapper {
   display: flex;
@@ -23,7 +24,7 @@ html, body, .wrapper, .topo-light, .modal-content {
   }
 
   .walks {
-    margin-top: 8em;
+    margin-top: 5em;
   }
 }
 
