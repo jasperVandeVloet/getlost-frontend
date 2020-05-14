@@ -67,10 +67,10 @@
         right: 0;
         width: 300px;
         padding: 75px 50px 30px 50px;
-        border-radius: 50%;
+        // border-radius: 50%;
         list-style-type: none;
-        transition: border-radius 1s;
-        transition-delay:.4s ;
+        // transition: border-radius .5s;
+        // transition-delay: .3s;
 
         animation-name: slide-out;
         animation-duration: 1s;
@@ -88,7 +88,7 @@
 
         &.show {
             animation-name: slide-in;
-            animation-duration: 1s;
+            animation-duration: .8s;
             animation-timing-function: ease;
             border-radius: 0 0 0 100px;
         }
@@ -105,7 +105,7 @@
             background-image: url('/assets/svg/topo-dark.svg');
             background-repeat: repeat;
             background-color: $dark;
-            opacity: .9;
+            // opacity: .9;
             border-radius: inherit;
         }
 
@@ -113,15 +113,17 @@
 
     @keyframes slide-in {
       0%{
-        -webkit-transform: translateX(500px) translateY(-500px);
-        transform: translateX(500px) translateY(-500px);
+        -webkit-transform: translateX(150px) translateY(-150px) rotate(20deg);
+        transform: translateX(150px) translateY(-150px) rotate(20deg);
 
+      }
+      30%{
+          transform: rotate(0);
+          border-radius: 50%;
       }
       100%{
         -webkit-transform: translateX(0) translateY(0);
-        transform: translateX(0) translateY(0);
-
-
+        transform: translateX(0) translateY(0) ;
       }
     }
 

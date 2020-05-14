@@ -11,4 +11,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public hasWalk(): boolean {
+    if ( localStorage.getItem('walk') && localStorage.getItem('checkpoints')) {
+      return true;
+    }
+    return false;
+  }
+
 }

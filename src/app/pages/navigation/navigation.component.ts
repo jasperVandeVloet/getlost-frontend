@@ -16,7 +16,7 @@ export class NavigationComponent implements OnInit {
   protected bsModalRef: BsModalRef;
   protected optionsHighAccuracy = { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true };
   protected optionsLowAccuracy = { maximumAge: 600000, timeout: 10000, enableHighAccuracy: false };
-  protected fenceRadius = 10; // radius of how close to get to checkpoint in m.
+  protected fenceRadius = 20; // radius of how close to get to checkpoint in m.
 
   public checkpoints: Checkpoint[];
   public destinationAngle = 0;

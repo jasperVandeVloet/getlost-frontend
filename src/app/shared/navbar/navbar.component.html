@@ -28,6 +28,14 @@
           <a class="nav-link" routerLinkActive="active" routerLink="/hoe-werkt-het"
             (click)="isCollapsed = !isCollapsed">Hoe werkt het?</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/contact"
+            (click)="isCollapsed = !isCollapsed">Contact</a>
+        </li>
+        <li class="nav-item" *ngIf="hasWalk()">
+          <a class="nav-link" routerLinkActive="active" routerLink="/onderweg"
+            (click)="isCollapsed = !isCollapsed">Vervolg je route</a>
+        </li>
       </ul>
     </div>
     </div>
