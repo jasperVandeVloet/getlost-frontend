@@ -24,7 +24,7 @@
             &.circle {
                 border:none;
                 z-index: -1;
-                background-color: rgba($color: $primary, $alpha: .7);
+                background-color: $primary;
                 border-radius: 100%;
                 position: absolute;
                 top: 50%;
@@ -52,7 +52,7 @@
                 }
 
                 &.circle {
-                    transform: translate(-50%, -20%) scale(0.2);
+                    transform: translate(-35%, -50%) scale(0.2);
                     opacity: 0;
                 }
 
