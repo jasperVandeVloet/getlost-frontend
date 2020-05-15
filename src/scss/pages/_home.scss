@@ -82,6 +82,18 @@
       object-fit: cover;
       border-radius: $border-radius-left;
     }
+
+    .shadow-left {
+        -webkit-box-shadow: -4px 4px 10px -4px $dark;
+        -moz-box-shadow: -4px 4px 10px -4px$dark;
+        box-shadow: -4px 4px 10px -4px $dark;
+    }
+
+    .shadow-right {
+        -webkit-box-shadow: 4px 4px 10px -4px $dark;
+        -moz-box-shadow: 4px 4px 10px -4px$dark;
+        box-shadow: 4px 4px 10px -4px $dark;
+    }
   }
 
 }

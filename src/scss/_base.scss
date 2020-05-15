@@ -7,7 +7,7 @@ html, body, .wrapper, .topo-light, .modal-content {
   background-repeat: repeat;
 }
 
-.topo-dark, .modal-backdrop, .bg-dark {
+.topo-dark, .modal-backdrop {
   background-image: url('/assets/svg/topo-dark.svg');
   background-repeat: repeat;
   background-color: $dark

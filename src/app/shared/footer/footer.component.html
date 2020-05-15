@@ -1,6 +1,16 @@
 <img src="/assets/img/forest.png" alt="" class="w-100">
-<footer class="bg-dark text-light p-0" *ngIf="hideFooterOn('/onderweg')">
-  <div class="container">
-    <p class="m-0">Dit is footer</p>
+<footer class="bg-dark text-primary p-0" *ngIf="hideFooterOn('/onderweg')">
+  <div class="container text-center pt-4">
+        <a class="btn btn-link" href="/wandelingen">Bekijk alle wandelingen</a>
+        <a class="btn btn-link" href="/faq">FAQ</a>
+        <a class="btn btn-link" href="/contact">Wil je ook een wandeling maken</a>
+        <a class="btn btn-link" href="/faq">Hulp nodig</a>
+        <a class="btn btn-link" href="/contact">Contact</a>
+
+        <div class="personal-info py-4">
+          <a class="btn btn-link" href="https://github.com/jasperVandevloet" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+          <a class="btn btn-link" href="mailto:jaspervandevloet@gmail.com">Jasper Van de Vloet</a>
+        </div>
+
   </div>
 </footer>

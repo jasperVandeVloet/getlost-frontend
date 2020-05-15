@@ -3,8 +3,8 @@
     <img src="/assets/img/hero.jpg" alt="" class="hero">
   </div>
 
-  <div *ngIf="content?.id">
-    <div class="overlay bg-dark text-light py-4">
+  <div *ngIf="content?.id; else loading">
+    <div class="overlay topo-dark text-light py-4">
       <div class="container">
         <div class="quote row">
           <div class="col-10">
@@ -21,7 +21,7 @@
       <div class="blog my-5" *ngFor="let item of content?.blog; odd as isOdd; even as isEven">
         <div class="row" *ngIf="isEven">
           <div class="col-lg-5 col-md-6 col-12 mb-3 mb-md-0">
-            <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img">
+            <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img shadow-right">
           </div>
           <div class="col d-flex flex-column justify-content-center">
             <h4 class="blog-title font-italic">{{ item.title }}</h4>
@@ -38,7 +38,7 @@
             <a class="btn btn-primary align-self-sm-center" href="{{ item.cta.path}}">{{ item.cta.text }}</a>
           </div>
           <div class="col-lg-5 col-md-6 col-12 order-md-2 order-1 mb-3 mb-md-0">
-            <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img">
+            <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img shadow-left">
           </div>
         </div>
       </div>
@@ -63,6 +63,11 @@
       </div> -->
     </div>
   </div>
+
+  <ng-template #loading>
+    <app-loader></app-loader>
+  </ng-template>
+
 </div>
 
 
