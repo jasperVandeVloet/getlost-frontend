@@ -7,6 +7,7 @@ import { Checkpoint } from 'src/app/models/checkpoint';
 import { CheckpointModalComponent } from 'src/app/components/checkpoint-modal/checkpoint-modal.component';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { LocationService } from 'src/app/service/location.service';
 
 @Component({
   selector: 'app-navigation',
@@ -35,7 +36,8 @@ export class NavigationComponent implements OnInit {
     private device: DeviceService,
     private modalService: BsModalService,
     private titleService: Title,
-    private router: Router
+    private router: Router,
+    private location: LocationService
   ) { }
 
   ngOnInit(): void {
@@ -146,7 +148,7 @@ export class NavigationComponent implements OnInit {
     this.distanceAccuracy = Math.floor(position.coords.accuracy);
 
     if (this.destination.coordinate !== undefined) {
-      this.distance = this.calculateDistance(this.currentLocation, this.destination.coordinate);
+      this.distance = this.location.calculateDistance(this.currentLocation, this.destination.coordinate);
     }
     else {
       this.error = 'No destination set.';
@@ -204,20 +206,20 @@ export class NavigationComponent implements OnInit {
    * Calculate distance from current location to checkpoint
    * Resource: http://www.movable-type.co.uk/scripts/latlong.html
    */
-  protected calculateDistance(currentLocation: Coordinate, destination: Coordinate) {
-    const R = 63710; // earthRadius in km
-    const dLat = (destination.latitude - currentLocation.latitude) * Math.PI / 180;
-    const dLng = (destination.longitude - currentLocation.longitude) * Math.PI / 180;
+  // protected calculateDistance(currentLocation: Coordinate, destination: Coordinate) {
+  //   const R = 63710; // earthRadius in km
+  //   const dLat = (destination.latitude - currentLocation.latitude) * Math.PI / 180;
+  //   const dLng = (destination.longitude - currentLocation.longitude) * Math.PI / 180;
 
-    const a =
-      0.5 - Math.cos(dLat) / 2 +
-      Math.cos(currentLocation.latitude * Math.PI / 180) * Math.cos(destination.latitude * Math.PI / 180) *
-      (1 - Math.cos(dLng)) / 2;
+  //   const a =
+  //     0.5 - Math.cos(dLat) / 2 +
+  //     Math.cos(currentLocation.latitude * Math.PI / 180) * Math.cos(destination.latitude * Math.PI / 180) *
+  //     (1 - Math.cos(dLng)) / 2;
 
-    const result = R * 2 * Math.asin(Math.sqrt(a)) * 100;
+  //   const result = R * 2 * Math.asin(Math.sqrt(a)) * 100;
 
-    return Math.floor(result);
-  }
+  //   return Math.floor(result);
+  // }
 
   /**
    * Ask acces to device orientation and motion events
@@ -277,13 +279,13 @@ export class NavigationComponent implements OnInit {
     };
 
     // calcuate distance for y-axis
-    let y = this.calculateDistance(begin, endY);
+    let y = this.location.calculateDistance(begin, endY);
     if (begin.latitude > this.destination.coordinate.latitude) {
       y *= -1;
     }
 
     // calcuate distance for x-axis
-    let x = this.calculateDistance(begin, endX);
+    let x = this.location.calculateDistance(begin, endX);
     if (begin.longitude > this.destination.coordinate.longitude) {
       x *= -1;
     }
