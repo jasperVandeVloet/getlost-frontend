@@ -33,6 +33,10 @@
                 transform: translate(-50%, -50%);
                 width: 60px;
                 height: 60px;
+
+                -webkit-box-shadow: 0px 0px 5px 1px rgba($color: $primary, $alpha: .6);
+                -moz-box-shadow: 0px 0px 5px 1px rgba($color: $primary, $alpha: .6);
+                box-shadow: 0px 0px 5px 1px rgba($color: $primary, $alpha: .6);
             }
         }
 

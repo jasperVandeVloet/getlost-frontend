@@ -3,6 +3,8 @@ import { Title } from '@angular/platform-browser';
 
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions } from 'ngx-lottie';
+import { ApiService } from 'src/app/service/api.service';
+
 declare var Rellax: any;
 
 @Component({
@@ -13,6 +15,7 @@ declare var Rellax: any;
 
 
 export class HomeComponent implements OnInit {
+  public content;
   // public rellax;
   // public options: AnimationOptions = {
   //   // path: 'https://assets3.lottiefiles.com/packages/lf20_ZWEJL5.json',
@@ -22,12 +25,15 @@ export class HomeComponent implements OnInit {
   // };
 
   constructor(
-    private titleService: Title
+    private titleService: Title,
+    private api: ApiService,
   ) { }
 
   ngOnInit(): void {
     // this.rellax = new Rellax('.rellax');
     this.setTitle('Get Lost - Home');
+
+    this.api.getHomepage().subscribe(res => this.content = res);
   }
 
   protected setTitle(newTitle: string) {

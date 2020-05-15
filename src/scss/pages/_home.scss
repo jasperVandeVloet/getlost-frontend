@@ -1,4 +1,10 @@
 .hero {
+    img {
+        height: 100vh;
+        object-fit: cover;
+    }
+
+
   position: relative;
 
   .parallax-el {
@@ -23,16 +29,56 @@
   }
 }
 
+/////////////////////////////////////////////
 
 .home {
+
   img {
     width: 100%;
+    object-fit: cover;
+  }
+
+  .quote {
+      .quote-sentence {
+        margin-bottom: .5rem;
+        position: relative;
+        font-family: $font-family-sans-serif;
+        font-style: italic;
+
+        &::before {
+            content: "“";
+            font-size: 2rem;
+            position: absolute;
+            left: -1rem;
+        }
+
+        &::after {
+            content: "”";
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+      }
+      .quote-author {
+          position: relative;
+          font-size: 1.25rem;
+          margin-left: 1.2rem;
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: -1.2rem;
+            height: 1px;
+            width: 1rem;
+
+            background-color: $light;
+        }
+      }
   }
 
   .blog{
-
-    .blog-img-top {
-      height: 200px;
+    .blog-img {
+      height: 250px;
       object-fit: cover;
       border-radius: $border-radius-left;
     }

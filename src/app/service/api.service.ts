@@ -25,5 +25,9 @@ export class ApiService {
     return this.http.get<Walk>(this.basePath + 'walks/' + slug);
   }
 
+  public getHomepage() {
+    return this.http.get(this.basePath + 'homepage');
+  }
+
 
 }

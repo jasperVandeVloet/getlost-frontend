@@ -1,29 +1,70 @@
 <div class="home">
-  <div class="header mb-4">
-    <img src="/assets/img/hero.jpg" alt="">
-    <div class="overlay text-center">
-      <h2>Er wacht een nieuwe wereld om de hoek.</h2>
-      <p>Mss Quote!?</p>
-      <a href="/wandelingen" class="btn btn-primary">Ontdek het hier</a>
-    </div>
+  <div class="hero">
+    <img src="/assets/img/hero.jpg" alt="" class="hero">
   </div>
 
-  <div class="container">
-    <h3 class="text-center">Loop eens verloren in je eigen omgeving</h3>
-
-    <div class="blog text-center mb-4">
-      <!-- <img src="/assets/img/annie-spratt-GIK1tsETnXI-unsplash.jpg" alt="kids in the forest" class="blog-img-top rounded-custom-left"> -->
-      <div class="blog-body">
-        <h5 class="blog-title">Loop eens verloren in je eigen omgeving</h5>
-        <p class="blog-text">De natuur intrekken is leuk, zeker als je weet waar je moet kijken. Er is zoveel moois rondom ons waar je anders gewoon
-        voorbij loopt. We nemen je mee op ontdekkingstocht zoals men dit vroeger ook deed. Met enkel een kompas dat je in de
-        richting van het volgende punt wijst, en zegt hoever het nog is. Bij elk punt geven we een woordje uitleg, of kan je
-        genieten van een activiteit. Waarna je weer verder kan tot het volgende punt.</p>
-        <a href="/wandelingen" class="btn btn-primary btn-block">overzicht</a>
+  <div *ngIf="content?.id">
+    <div class="overlay bg-dark text-light py-4">
+      <div class="container">
+        <div class="quote row">
+          <div class="col-10">
+            <h3 class="quote-sentence">{{ content?.quote }}</h3>
+            <!-- <p class="quote-author">Plato</p> -->
+          </div>
+        </div>
       </div>
+    </div>
+    <div class="container">
+      <div class="introduction mt-4">
+        <showdown [value]="content.introduction" class="w-100"></showdown>
+      </div>
+      <div class="blog my-5" *ngFor="let item of content?.blog; odd as isOdd; even as isEven">
+        <div class="row" *ngIf="isEven">
+          <div class="col-lg-5 col-md-6 col-12 mb-3 mb-md-0">
+            <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img">
+          </div>
+          <div class="col d-flex flex-column justify-content-center">
+            <h4 class="blog-title font-italic">{{ item.title }}</h4>
+            <p class="blog-text">{{ item.description }}</p>
+
+            <a class="btn btn-primary align-self-sm-center" href="{{ item.cta.path}}">{{ item.cta.text }}</a>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="isOdd">
+          <div class="col d-flex flex-column justify-content-center order-md-1 order-2">
+            <h4 class="blog-title font-italic">{{ item.title }}</h4>
+            <p class="blog-text">{{ item.description }}</p>
+            <a class="btn btn-primary align-self-sm-center" href="{{ item.cta.path}}">{{ item.cta.text }}</a>
+          </div>
+          <div class="col-lg-5 col-md-6 col-12 order-md-2 order-1 mb-3 mb-md-0">
+            <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="blog row my-5">
+        <div class="col-6 d-flex flex-column justify-content-center">
+          <h4 class="blog-title font-italic">Loop eens verloren in je eigen omgeving</h4>
+          <p class="blog-text">De natuur intrekken is leuk, zeker als je weet waar je moet kijken. Er is zoveel moois
+            rondom ons waar je anders gewoon
+            voorbij loopt. We nemen je mee op ontdekkingstocht zoals men dit vroeger ook deed. Met enkel een kompas dat
+            je
+            in de
+            richting van het volgende punt wijst, en zegt hoever het nog is. Bij elk punt geven we een woordje uitleg,
+            of
+            kan je
+            genieten van een activiteit. Waarna je weer verder kan tot het volgende punt.</p>
+          <a href="/wandelingen">Ontdek in jouw buurt</a>
+        </div>
+        <div class="col-6">
+          <img src="/assets/img/hero.jpg" alt="kids in the forest" class="blog-img">
+        </div>
+      </div> -->
     </div>
   </div>
 </div>
+
 
 <!-- <div class="hero w-100">
   <img src="/assets/img/hero.jpg" alt="" class="hero-img w-100">
