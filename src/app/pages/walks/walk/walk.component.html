@@ -10,11 +10,34 @@
 
       <h5 class="text-capitalize">provincie: {{ walk.province }}</h5>
       <h5 class="text-capitalize">aantal checkpoints: {{ walk?.checkpoint.length }}</h5>
-
-      <div class="specs d-flex align-items-center">
-        <h5 class="m-0"><i class="fas fa-baby-carriage pr-3" *ngIf="walk.kids_friendly"></i></h5>
-        <h5 class="m-0"><i class="fas fa-wheelchair  pr-3" *ngIf="walk.wheelchair_friendly"></i></h5>
-        <app-difficulty-rating class="rating" [difficulty]="walk.difficulty"></app-difficulty-rating>
+      <div class="row">
+        <div class="specs col d-flex align-items-center">
+          <h5 class="m-0"><i class="fas fa-baby-carriage pr-3" *ngIf="walk.kids_friendly"></i></h5>
+          <h5 class="m-0"><i class="fas fa-wheelchair  pr-3" *ngIf="walk.wheelchair_friendly"></i></h5>
+          <app-difficulty-rating class="rating" [difficulty]="walk.difficulty"></app-difficulty-rating>
+        </div>
+        <div class="share col-auto d-flex align-items-center justify-content-end">
+          <h4 class="d-inline mb-0">Deel op</h4>
+          <a class="btn btn-link" href="https://facebook.com/sharer/sharer.php?u={{ pathAsVar }}" target="_blank"
+            rel="noopener" aria-label="">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a class="btn btn-link"
+            href="https://twitter.com/intent/tweet/?text=Ontdek%20verborgen%20parels%20in%20je%20buurt.&amp;url={{ pathAsVar }}"
+            target="_blank" rel="noopener" aria-label="">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a class="btn btn-link"
+            href="mailto:?subject=Ontdek%20verborgen%20parels%20in%20je%20buurt.&amp;body={{ pathAsVar }}"
+            target="_self" rel="noopener" aria-label="">
+            <i class="far fa-envelope"></i>
+          </a>
+          <!-- <a class="btn btn-link"
+            href="whatsapp://send?text=Ontdek%20verborgen%20parels%20in%20je%20buurt.%20{{ pathAsVar }}" target="_blank"
+            rel="noopener" aria-label="">
+            <i class="fab fa-whatsapp"></i>
+          </a> -->
+        </div>
       </div>
       <div class="border border-dark my-3"></div>
 

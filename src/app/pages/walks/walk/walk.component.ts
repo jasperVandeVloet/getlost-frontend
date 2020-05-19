@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 })
 export class WalkComponent implements OnInit {
   public basePath = environment.frontendBasePath;
+  public pathAsVar = environment.frontendVariablePath;
   public walk: Walk;
 
   public modalRef: BsModalRef;
@@ -34,6 +35,8 @@ export class WalkComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.getWalk(params.slug);
+      console.log('WalkComponent -> ngOnInit -> params.slug', params.slug);
+      this.pathAsVar = environment.frontendVariablePath + '%2Fwandelingen%2F' + params.slug;
     });
   }
 
