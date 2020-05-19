@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -8,6 +10,7 @@ import {  Router } from '@angular/router';
   ]
 })
 export class FooterComponent implements OnInit {
+  public path = environment.frontendVariablePath;
 
   constructor(
     private router: Router,

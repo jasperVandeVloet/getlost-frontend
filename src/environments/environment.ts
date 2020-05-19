@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   apiBasePath: 'https://getlost-backend.herokuapp.com/',
   frontendBasePath: 'https://192.168.0.231:4200/',
+  frontendVariablePath: 'https%3A%2F%2Fgetlost-frontend.netlify.app'
 };
 
 /*
