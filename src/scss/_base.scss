@@ -10,7 +10,10 @@ html, body, .wrapper, .topo-light, .modal-content {
 .topo-dark, .modal-backdrop {
   background-image: url('/assets/svg/topo-dark.svg');
   background-repeat: repeat;
-  background-color: $dark
+  background-color: $dark;
+  -webkit-box-shadow: -4px 4px 10px -4px $dark;
+  -moz-box-shadow: -4px 4px 10px -4px $dark;
+  box-shadow: -4px 4px 10px -4px $dark;
 }
 .wrapper {
   display: flex;
