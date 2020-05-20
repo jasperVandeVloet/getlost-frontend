@@ -5,6 +5,7 @@ import { DeviceService } from 'src/app/service/device.service';
 import { Coordinate } from 'src/app/models/coordinate';
 import { Checkpoint } from 'src/app/models/checkpoint';
 import { CheckpointModalComponent } from 'src/app/components/checkpoint-modal/checkpoint-modal.component';
+import { FinishModalComponent } from 'src/app/components/finish-modal/finish-modal.component';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { LocationService } from 'src/app/service/location.service';
@@ -69,37 +70,32 @@ export class NavigationComponent implements OnInit {
    * If current is already set, this means a user was walking and is now returning, so we go further from current.
    */
   protected setCurrentCheckpoint(atCheckpoint?: boolean): void {
-    if (localStorage.getItem('current') === null ) {
-      console.log('INITIALIZE CURRENT (should be 0)', this.currentCheckpoint);
+    console.log('NavigationComponent -> setCurrentCheckpoint -> setCurrentCheckpoint CALLED');
+    // If nothing in storage
+    if (localStorage.getItem('current') === null) {
       this.currentCheckpoint = 0;
-
-      console.log('SET CHECKPOINT TO LOCALSTORAGE PRE', localStorage.getItem('current'));
       localStorage.setItem('current', this.currentCheckpoint.toString());
-      console.log('SET CHECKPOINT TO LOCALSTORAGE POST', localStorage.getItem('current'));
     }
+    // if function called at checkpoint
     else if (atCheckpoint) {
-      console.log('CURRENT ++ PRE', this.currentCheckpoint);
-      this.currentCheckpoint ++;
-      console.log('CURRENT ++ POST', this.currentCheckpoint);
-
-      console.log('SET CHECKPOINT TO LOCALSTORAGE PRE', localStorage.getItem('current'));
+      this.currentCheckpoint++;
       localStorage.setItem('current', this.currentCheckpoint.toString());
-      console.log('SET CHECKPOINT TO LOCALSTORAGE POST', localStorage.getItem('current'));
     }
-    else  {
+    // if not at checkpoint, but has current so user started walking before
+    else {
       this.currentCheckpoint = parseInt(localStorage.getItem('current'), 10);
     }
 
+    console.log('NavigationComponent -> setCurrentCheckpoint -> this.currentCheckpoint', this.currentCheckpoint, '/',
+    this.checkpoints.length);
+
     if (this.currentCheckpoint < this.checkpoints.length) {
-      console.log(this.currentCheckpoint, 'kleiner dan', this.checkpoints.length);
       this.destination = this.checkpoints[this.currentCheckpoint];
-      console.log('NIEUWE CHECKPOINT GEKOZEN = ', this.checkpoints[this.currentCheckpoint].title);
+      console.log('KLEINER DAN');
     }
-    else if (this.currentCheckpoint >=  this.checkpoints.length){
+    else if (this.currentCheckpoint === this.checkpoints.length) {
       console.log('FINISH', this.currentCheckpoint, '/', this.checkpoints.length);
-      alert('FINISH!!!!');
-      localStorage.clear();
-      this.router.navigate(['/']);
+      this.finishWalk();
     }
 
   }
@@ -320,17 +316,38 @@ export class NavigationComponent implements OnInit {
   }
 
   public arrivedAtCheckpoint(): void {
-    this.openModalWithComponent();
-    this.setCurrentCheckpoint(true);
+    this.openCheckpointModal();
     console.log('* AT CHECKPOINT set to next* current = ', this.currentCheckpoint);
   }
 
-  protected openModalWithComponent() {
+  protected openCheckpointModal() {
     const initialState = {
       checkpoint: this.checkpoints[this.currentCheckpoint],
       title: this.walkTitle
     };
+
     this.bsModalRef = this.modalService.show(CheckpointModalComponent, { initialState, class: 'modal-dialog-centered', animated: true });
+
+    if (this.currentCheckpoint + 1 === this.checkpoints.length) {
+      this.bsModalRef.content.closeBtnName = 'Nog één punt te gaan';
+    }
+    else {
+      this.bsModalRef.content.closeBtnName = 'Naar het volgende punt';
+    }
+
+    this.modalService.onHidden.subscribe(() => {
+      console.log('callifornia');
+      this.setCurrentCheckpoint(true);
+    });
+
+  }
+
+  protected finishWalk() {
+    this.bsModalRef = this.modalService.show(FinishModalComponent, { class: 'modal-dialog-centered', animated: true });
+    this.modalService.onHidden.subscribe(() => {
+      // localStorage.clear();
+      // this.router.navigate(['/']);
+    });
   }
 
   /**

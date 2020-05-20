@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Checkpoint } from 'src/app/models/checkpoint';
 
@@ -10,10 +10,18 @@ import { Checkpoint } from 'src/app/models/checkpoint';
 export class CheckpointModalComponent implements OnInit {
   public checkpoint: Checkpoint;
   public title: string;
+  public closeBtnName: string;
   constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
-    console.log('MODAL OPEN');
+    this.playAudio();
+  }
+
+  protected playAudio() {
+    const audio = new Audio();
+    audio.src = '/assets/audio/arrived.wav';
+    audio.load();
+    audio.play();
   }
 
 }

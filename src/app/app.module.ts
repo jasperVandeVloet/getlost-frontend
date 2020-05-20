@@ -28,6 +28,7 @@ import { LoaderComponent } from './shared/loader/loader.component';
 import { DifficultyRatingComponent } from './components/difficulty-rating/difficulty-rating.component';
 import { NavigationComponent } from './pages/navigation/navigation.component';
 import { CheckpointModalComponent } from './components/checkpoint-modal/checkpoint-modal.component';
+import { FinishModalComponent } from './components/finish-modal/finish-modal.component';
 
 // Note we need a separate function as it's required
 // by the AOT compiler. Lottie
@@ -48,6 +49,7 @@ export function playerFactory() {
     DifficultyRatingComponent,
     NavigationComponent,
     CheckpointModalComponent,
+    FinishModalComponent,
   ],
   imports: [
     BrowserModule,

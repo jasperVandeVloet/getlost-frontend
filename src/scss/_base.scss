@@ -49,6 +49,7 @@ ul {
 .btn {
   text-transform: uppercase;
   font-weight: bold;
+  white-space: normal;
 }
 
 .btn-link:hover {
@@ -66,54 +67,10 @@ showdown {
       font-style: italic;
   }
 }
-.modal{
-    .modal-content {
-        // border-radius: 50%;
-        // transform: scaleX(.2);
-        border: none;
-        //transition: all .2s ease;
 
-        animation-name: slide-in;
-        animation-duration: .8s;
-        animation-timing-function: ease;
-    }
-
-    .show>.modal-dialog>.modal-content {
-        border-radius: $border-radius-left;
-        // transform: scaleX(1);
-        // transition: all .8s ease;
-        animation-name: slide-in;
-        animation-duration: .8s;
-        animation-timing-function: ease;
-    }
-
-    @keyframes slide-in {
-        0%{
-          // -webkit-transform: translateX(150px) translateY(-150px) rotate(20deg);
-          transform: translateX(150px) translateY(-150px) rotate(220deg);
-
-        }
-        30%{
-            transform: rotate(80deg);
-            border-radius: 50%;
-        }
-        100%{
-          // -webkit-transform: translateX(0) translateY(0);
-          transform: translateX(0) translateY(0) ;
-        }
-      }
-
-    //   @keyframes slide-out {
-    //     0%{
-    //       -webkit-transform: translateX(0) translateY(0);
-    //       transform: translateX(0) translateY(0);
-    //     }
-    //     100%{
-    //       -webkit-transform: translateX(500px) translateY(-500px);
-    //       transform: translateX(500px) translateY(-500px);
-
-    //     }
-    //   }
+.modal-content {
+    border-radius: $border-radius-left;
+    border: none;
 }
 
 
