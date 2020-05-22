@@ -1,12 +1,42 @@
 .how-it-works {
-    .header-img {
+    .header {
         width: 100%;
         max-width: 2000px;
         height: 300px;
-        object-fit: cover;
+
+        .header-img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
     }
+
+    .topo-dark {
+        background-size: 25%
+    }
+
 
     .loader {
         height: 90vh;
+    }
+
+    showdown {
+        img {
+            max-width: 40%;
+            margin: 2em 2em 0 0;
+        }
+
+        strong {
+            display: block;
+        }
+
+        ul {
+            list-style: circle;
+            margin-left: 1em;
+        }
+
+        h3 {
+            margin-top: 3rem;
+        }
     }
 }

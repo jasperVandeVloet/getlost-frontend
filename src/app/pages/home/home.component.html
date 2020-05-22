@@ -23,7 +23,7 @@
           <div class="col-lg-5 col-md-6 col-12 mb-3 mb-md-0">
             <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img shadow-right">
           </div>
-          <div class="col d-flex flex-column justify-content-center">
+          <div class="col">
             <h4 class="blog-title font-italic">{{ item.title }}</h4>
             <p class="blog-text">{{ item.description }}</p>
 
@@ -32,7 +32,7 @@
         </div>
 
         <div class="row" *ngIf="isOdd">
-          <div class="col d-flex flex-column justify-content-center order-md-1 order-2">
+          <div class="col order-md-1 order-2">
             <h4 class="blog-title font-italic">{{ item.title }}</h4>
             <p class="blog-text">{{ item.description }}</p>
             <a class="btn btn-primary align-self-sm-center" href="{{ item.cta.path}}">{{ item.cta.text }}</a>
@@ -44,7 +44,7 @@
       </div>
 
       <!-- <div class="blog row my-5">
-        <div class="col-6 d-flex flex-column justify-content-center">
+        <div class="col-6">
           <h4 class="blog-title font-italic">Loop eens verloren in je eigen omgeving</h4>
           <p class="blog-text">De natuur intrekken is leuk, zeker als je weet waar je moet kijken. Er is zoveel moois
             rondom ons waar je anders gewoon

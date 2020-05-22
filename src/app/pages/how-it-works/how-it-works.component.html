@@ -1,8 +1,17 @@
 <div class="how-it-works">
   <div *ngIf="content?.id; else loading">
-    <img src="{{ content?.header.url }}" alt="" class="header-img">
+    <div class="header">
+      <img src="{{ content?.header.url }}" alt="" class="header-img">
+    </div>
+    <div class="topo-dark">
+      <div class="container text-light py-3">
+        <h1>{{ content?.title }}</h1>
+        <!-- <img src="/assets/logo/logo-light.png" alt="Get Lost logo" class="logo my-4"> -->
+      </div>
+    </div>
+
     <div class="container mt-4">
-      <h1>{{ content?.title }}</h1>
+
       <showdown [value]="content?.body" class="w-100"></showdown>
     </div>
   </div>
