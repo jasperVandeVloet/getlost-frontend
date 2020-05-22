@@ -18,7 +18,7 @@ export class NavigationComponent implements OnInit {
   protected bsModalRef: BsModalRef;
   protected optionsHighAccuracy = { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true };
   protected optionsLowAccuracy = { maximumAge: 600000, timeout: 10000, enableHighAccuracy: false };
-  protected fenceRadius = 20; // radius of how close to get to checkpoint in m.
+  protected fenceRadius = 25; // radius of how close to get to checkpoint in m.
 
   public checkpoints: Checkpoint[];
   public destinationAngle = 0;
@@ -56,8 +56,16 @@ export class NavigationComponent implements OnInit {
    * So user can use phone for other purpose and return to walking when needed.
    */
   protected getDataFromStorage(): void {
-    this.walkTitle = localStorage.getItem('walk');
-    this.checkpoints = JSON.parse(localStorage.getItem('checkpoints'));
+
+    if (localStorage.getItem('checkpoints') === null || localStorage.getItem('walk') === null) {
+      localStorage.clear();
+      // redirect
+      this.router.navigate(['/wandelingen']);
+    }
+    else {
+      this.walkTitle = localStorage.getItem('walk');
+      this.checkpoints = JSON.parse(localStorage.getItem('checkpoints'));
+    }
     console.log('NavigationComponent -> getDataFromStorage -> this.checkpoints', this.checkpoints);
 
     console.log('NavigationComponent -> getDataFromStorage )', localStorage.getItem('current'));
@@ -70,31 +78,39 @@ export class NavigationComponent implements OnInit {
    * If current is already set, this means a user was walking and is now returning, so we go further from current.
    */
   protected setCurrentCheckpoint(atCheckpoint?: boolean): void {
-    console.log('NavigationComponent -> setCurrentCheckpoint -> setCurrentCheckpoint CALLED');
+    // console.log('NavigationComponent -> setCurrentCheckpoint -> setCurrentCheckpoint CALLED');
     // If nothing in storage
     if (localStorage.getItem('current') === null) {
+      // console.log('INITIALIZE CURRENT (should be 0)', this.currentCheckpoint);
       this.currentCheckpoint = 0;
+      // console.log('SET CHECKPOINT TO LOCALSTORAGE PRE', localStorage.getItem('current'));
       localStorage.setItem('current', this.currentCheckpoint.toString());
+      // console.log('SET CHECKPOINT TO LOCALSTORAGE POST', localStorage.getItem('current'));
     }
     // if function called at checkpoint
     else if (atCheckpoint) {
+      // console.log('CURRENT ++ PRE', this.currentCheckpoint);
       this.currentCheckpoint++;
+      // console.log('CURRENT ++ POST', this.currentCheckpoint);
+      // console.log('SET CHECKPOINT TO LOCALSTORAGE PRE', localStorage.getItem('current'));
       localStorage.setItem('current', this.currentCheckpoint.toString());
+      // console.log('SET CHECKPOINT TO LOCALSTORAGE POST', localStorage.getItem('current'));
     }
     // if not at checkpoint, but has current so user started walking before
     else {
       this.currentCheckpoint = parseInt(localStorage.getItem('current'), 10);
     }
 
-    console.log('NavigationComponent -> setCurrentCheckpoint -> this.currentCheckpoint', this.currentCheckpoint, '/',
-    this.checkpoints.length);
+    // tslint:disable-next-line: max-line-length
+    // console.log('NavigationComponent -> setCurrentCheckpoint -> this.currentCheckpoint', this.currentCheckpoint, '/', this.checkpoints.length);
 
     if (this.currentCheckpoint < this.checkpoints.length) {
+      // console.log(this.currentCheckpoint, 'kleiner dan', this.checkpoints.length);
       this.destination = this.checkpoints[this.currentCheckpoint];
-      console.log('KLEINER DAN');
+      // console.log('NIEUWE CHECKPOINT GEKOZEN = ', this.checkpoints[this.currentCheckpoint].title);
     }
     else if (this.currentCheckpoint === this.checkpoints.length) {
-      console.log('FINISH', this.currentCheckpoint, '/', this.checkpoints.length);
+      // console.log('FINISH', this.currentCheckpoint, '/', this.checkpoints.length);
       this.finishWalk();
     }
 
@@ -317,6 +333,7 @@ export class NavigationComponent implements OnInit {
 
   public arrivedAtCheckpoint(): void {
     this.openCheckpointModal();
+    this.setCurrentCheckpoint(true);
     console.log('* AT CHECKPOINT set to next* current = ', this.currentCheckpoint);
   }
 
@@ -328,18 +345,15 @@ export class NavigationComponent implements OnInit {
 
     this.bsModalRef = this.modalService.show(CheckpointModalComponent, { initialState, class: 'modal-dialog-centered', animated: true });
 
-    if (this.currentCheckpoint + 1 === this.checkpoints.length) {
+    if (this.currentCheckpoint + 2 === this.checkpoints.length) {
       this.bsModalRef.content.closeBtnName = 'Nog één punt te gaan';
+    }
+    else if (this.currentCheckpoint + 1 === this.checkpoints.length) {
+      this.bsModalRef.content.closeBtnName = 'Einde';
     }
     else {
       this.bsModalRef.content.closeBtnName = 'Naar het volgende punt';
     }
-
-    this.modalService.onHidden.subscribe(() => {
-      console.log('callifornia');
-      this.setCurrentCheckpoint(true);
-    });
-
   }
 
   protected finishWalk() {
