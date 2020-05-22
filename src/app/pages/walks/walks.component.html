@@ -67,6 +67,7 @@
                 <div class="specs">
                   <h5>{{ walk.checkpoint.length }} checkpoint<span *ngIf="walk.checkpoint.length != 1">s</span></h5>
                   <div class="d-flex">
+                    <h5 class="m-0 mr-3" *ngIf="walk.distance > 0">{{ walk.distance }} km</h5>
                     <h5 class="m-0"><i class="fas fa-baby-carriage pr-3" *ngIf="walk.kids_friendly"></i></h5>
                     <h5 class="m-0"><i class="fas fa-wheelchair  pr-3" *ngIf="walk.wheelchair_friendly"></i></h5>
                     <app-difficulty-rating class="rating" [difficulty]="walk.difficulty"></app-difficulty-rating>

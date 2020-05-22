@@ -6,6 +6,7 @@ import { Options } from 'ng5-slider';
 
 import { ApiService } from 'src/app/service/api.service';
 import { Walk } from 'src/app/models/walk';
+import { LocationService } from 'src/app/service/location.service';
 
 
 @Component({
@@ -55,13 +56,14 @@ export class WalksComponent implements OnInit {
   constructor(
     private api: ApiService,
     private fb: FormBuilder,
-    private titleService: Title
+    private titleService: Title,
+    private location: LocationService
   ) { }
 
   ngOnInit(): void {
     this.setWindow('Get Lost - Overzicht');
     this.getWalks();
-    console.log(this.filterForm.value);
+    // console.log(this.filterForm.value);
 
   }
 
@@ -77,8 +79,13 @@ export class WalksComponent implements OnInit {
   protected getWalks(): void {
     if (this.walks === undefined) {
       this.api.getWalks().subscribe((res) => {
+        // console.log('WalksComponent -> getWalks -> res', res);
+        res.forEach((walk) => {
+          walk.province = walk.province.replace(/_/g, ' ');
+          walk.distance = this.location.getDistance(walk.checkpoint);
+        });
         this.walks = res;
-        console.log('WalksComponent -> getWalks -> res', res);
+        // console.log('WalksComponent -> getWalks -> res', res);
         this.filteredWalks = res;
 
         this.updateWalks(true);
@@ -121,7 +128,7 @@ export class WalksComponent implements OnInit {
   protected updateWalks(init?: boolean): void {
     const result = [];
     let filter = this.filterForm.value;
-    console.log('WalksComponent -> updateWalks -> filter', filter);
+    // console.log('WalksComponent -> updateWalks -> filter', filter);
 
     if (init && sessionStorage.getItem('filter')) {
       // if onInit

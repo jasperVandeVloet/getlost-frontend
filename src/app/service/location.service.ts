@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Coordinate } from '../models/coordinate';
+import { Checkpoint } from '../models/checkpoint';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,17 @@ export class LocationService {
     const result = R * 2 * Math.asin(Math.sqrt(a)) * 100;
 
     return Math.floor(result);
+  }
+
+  public getDistance(points: Checkpoint[]): number {
+    let distance = 0;
+
+    if (points.length > 2) {
+      for (let i = 0; i < points.length - 1; i++) {
+        console.log('i', i);
+        distance += this.calculateDistance(points[i].coordinate, points[i + 1].coordinate);
+      }
+    }
+    return Math.ceil(distance / 1000);
   }
 }
