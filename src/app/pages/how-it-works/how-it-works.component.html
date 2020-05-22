@@ -2,11 +2,13 @@
   <div *ngIf="content?.id; else loading">
     <div class="header">
       <img src="{{ content?.header.url }}" alt="" class="header-img">
+      <div class="container">
+        <img src="/assets/svg/logo-dark.svg" alt="Get Lost logo" class="logo">
+      </div>
     </div>
     <div class="topo-dark">
       <div class="container text-light py-3">
-        <h1>{{ content?.title }}</h1>
-        <!-- <img src="/assets/logo/logo-light.png" alt="Get Lost logo" class="logo my-4"> -->
+        <h1 class="font-italic">{{ content?.title }}</h1>
       </div>
     </div>
 

@@ -26,10 +26,6 @@ html, body, .wrapper, .topo-light, .modal-content {
   .footer {
     flex-shrink: 0;
   }
-
-  .walks {
-    margin-top: 5em;
-  }
 }
 
 h4 {
@@ -74,7 +70,42 @@ showdown {
     border: none;
 }
 
+.header {
+    width: 100%;
+    max-width: 2000px;
+    height: 300px;
+    position: relative;
 
+    .header-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: 0 0;
+        @include media-breakpoint-up(sm) {
+            object-position: 50% 75%;
+        }
+        @include media-breakpoint-up(lg) {
+            object-position: 50% 78%;
+        }
+    }
+
+    .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        .logo {
+            width: 65%;
+            @include media-breakpoint-up(sm) {
+                width: 40%;
+            }
+            @include media-breakpoint-up(md) {
+                width: 30%;
+            }
+        }
+    }
+}
 
 
 
