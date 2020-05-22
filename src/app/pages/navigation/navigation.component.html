@@ -9,7 +9,8 @@
 
     <div class="data">
       <div class="distance">
-        <h1>{{ distance }}m</h1>
+        <h1 *ngIf="distance < 1000">{{ distance }}m</h1>
+        <h1 *ngIf="distance >= 1000">{{ distance / 1000 }}km</h1>
         <h2 class="text-uppercase">tot checkpoint</h2>
         <p class="text-center text-uppercase mb-1 small">{{ walkTitle }}</p>
       </div>

@@ -1,7 +1,18 @@
 <div class="how-it-works">
+  <div *ngIf="content?.id; else loading">
     <img src="{{ content?.header.url }}" alt="" class="header-img">
-  <div class="container mt-4">
-    <h1>{{ content?.title }}</h1>
-    <showdown [value]="content?.body" class="w-100"></showdown>
+    <div class="container mt-4">
+      <h1>{{ content?.title }}</h1>
+      <showdown [value]="content?.body" class="w-100"></showdown>
+    </div>
   </div>
+
+  <ng-template #loading>
+    <div class="row w-100 loader">
+      <div class="col h-100">
+        <app-loader></app-loader>
+      </div>
+    </div>
+
+  </ng-template>
 </div>
