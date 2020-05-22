@@ -1,77 +1,81 @@
 <div class="walk" *ngIf="walk?.id; else loading">
-  <div class="hero">
-    <img src="{{ walk?.image.url }}" alt="{{ walk?.slug }}" class="hero-img">
+  <div class="header">
+    <img src="{{ walk?.image.url }}" alt="{{ walk?.slug }}" class="header-img">
+    <div class="container">
+      <img src="/assets/svg/logo-dark.svg" alt="Get Lost logo" class="logo">
+    </div>
+  </div>
+  <div class="topo-dark">
+    <div class="container text-light py-3">
+      <h2 class="font-weight-bold">{{ walk?.title }}</h2>
+    </div>
   </div>
 
-  <div class="decorator">
-    <div class="container">
-      <h2 class="font-weight-bold">{{ walk?.title }}</h2>
-      <div class="border border-dark my-3"></div>
-
-      <h5 class="text-capitalize">provincie: {{ walk.province }}</h5>
-      <h5 class="text-capitalize">aantal checkpoints: {{ walk?.checkpoint.length }}</h5>
-      <div class="row">
-        <div class="specs col d-flex align-items-center">
-          <h5 class="m-0"><i class="fas fa-baby-carriage pr-3" *ngIf="walk.kids_friendly"></i></h5>
-          <h5 class="m-0"><i class="fas fa-wheelchair  pr-3" *ngIf="walk.wheelchair_friendly"></i></h5>
-          <app-difficulty-rating class="rating" [difficulty]="walk.difficulty"></app-difficulty-rating>
-        </div>
-        <div class="share col-auto d-flex align-items-center justify-content-end">
-          <h4 class="d-inline mb-0">Deel op</h4>
-          <a class="btn btn-link" href="https://facebook.com/sharer/sharer.php?u={{ pathAsVar }}" target="_blank"
-            rel="noopener" aria-label="">
-            <i class="fab fa-facebook"></i>
-          </a>
-          <a class="btn btn-link"
-            href="https://twitter.com/intent/tweet/?text=Ontdek%20verborgen%20parels%20in%20je%20buurt.&amp;url={{ pathAsVar }}"
-            target="_blank" rel="noopener" aria-label="">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a class="btn btn-link"
-            href="mailto:?subject=Ontdek%20verborgen%20parels%20in%20je%20buurt.&amp;body={{ pathAsVar }}"
-            target="_self" rel="noopener" aria-label="">
-            <i class="far fa-envelope"></i>
-          </a>
-          <!-- <a class="btn btn-link"
+  <div class="container mt-5">
+    <h5 class="text-capitalize">provincie: {{ walk.province }}</h5>
+    <h5 class="text-capitalize">aantal checkpoints: {{ walk?.checkpoint.length }}</h5>
+    <div class="row">
+      <div class="specs col d-flex align-items-center">
+        <h5 class="m-0"><i class="fas fa-baby-carriage pr-3" *ngIf="walk.kids_friendly"></i></h5>
+        <h5 class="m-0"><i class="fas fa-wheelchair  pr-3" *ngIf="walk.wheelchair_friendly"></i></h5>
+        <app-difficulty-rating class="rating" [difficulty]="walk.difficulty"></app-difficulty-rating>
+      </div>
+      <div class="share col-auto d-flex align-items-center justify-content-end">
+        <h4 class="d-inline mb-0">Deel op</h4>
+        <a class="btn btn-link" href="https://facebook.com/sharer/sharer.php?u={{ pathAsVar }}" target="_blank"
+          rel="noopener" aria-label="">
+          <i class="fab fa-facebook"></i>
+        </a>
+        <a class="btn btn-link"
+          href="https://twitter.com/intent/tweet/?text=Ontdek%20verborgen%20parels%20in%20je%20buurt.&amp;url={{ pathAsVar }}"
+          target="_blank" rel="noopener" aria-label="">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a class="btn btn-link"
+          href="mailto:?subject=Ontdek%20verborgen%20parels%20in%20je%20buurt.&amp;body={{ pathAsVar }}" target="_self"
+          rel="noopener" aria-label="">
+          <i class="far fa-envelope"></i>
+        </a>
+        <a class="btn btn-link"
             href="whatsapp://send?text=Ontdek%20verborgen%20parels%20in%20je%20buurt.%20{{ pathAsVar }}" target="_blank"
             rel="noopener" aria-label="">
             <i class="fab fa-whatsapp"></i>
-          </a> -->
-        </div>
+          </a>
       </div>
-      <div class="border border-dark my-3"></div>
+    </div>
+    <div class="border border-dark my-3"></div>
 
-      <h4 class="font-weight-bold">Inleiding</h4>
-      <p>{{ walk?.description }}</p>
+    <h4 class="font-weight-bold">Inleiding</h4>
+    <p>{{ walk?.description }}</p>
 
-      <div class="disclaimer font-weight-bold" *ngIf="deviceIsMobile()">
-        <p>
-          Om de volledige ervaring van de wandeling te kunnen beleven zal er bij het begin de wandelling toestemming
-          tot je locatie en bewegingsensoren van je toestel worden gevraagt. We slagen ook enkele gegevens op in je
-          cache voor de voortgang van de wandeling.
-        </p>
-        <p>Dit wil niet zeggen dat we jou kunnen volgen of je gegevens doorverkopen of wat dan ook. Deze worden enkel
-          opgeslagen op jouw toestel. Niet op onze servers. Door verder te gaan, verkklaar je je hiermee akkoord</p>
-      </div>
+    <div class="disclaimer font-weight-bold" *ngIf="deviceIsMobile()">
+      <p>
+        Om de volledige ervaring van de wandeling te kunnen beleven zal er bij het begin de wandelling toestemming
+        tot je locatie en bewegingsensoren van je toestel worden gevraagt. We slagen ook enkele gegevens op in je
+        cache voor de voortgang van de wandeling.
+      </p>
+      <p>Dit wil niet zeggen dat we jou kunnen volgen of je gegevens doorverkopen of wat dan ook. Deze worden enkel
+        opgeslagen op jouw toestel. Niet op onze servers. Door verder te gaan, verkklaar je je hiermee akkoord</p>
+    </div>
 
-      <div class="disclaimer font-weight-bold" *ngIf="!deviceIsMobile()">
-        <p>
-          Scan onderstaande QR-code met je smartphone. Dit zal je doorverwijzen naar de wandelpagina op je smartphone.
-          Van hieruit kan je dan de wandeling starten
-        </p>
-      </div>
+    <div class="disclaimer font-weight-bold" *ngIf="!deviceIsMobile()">
+      <p>
+        Scan onderstaande QR-code met je smartphone. Dit zal je doorverwijzen naar de wandelpagina op je smartphone.
+        Van hieruit kan je dan de wandeling starten
+      </p>
+    </div>
 
-      <div class="text-center">
+    <div class="text-center">
 
-        <button class="btn btn-primary my-4 px-4 py-2" (click)="startWalking()">
-          <i class="far fa-compass mr-2"></i>Begin te wandellen!
-        </button>
+      <button class="btn btn-primary my-4 px-4 py-2" (click)="startWalking()" *ngIf="deviceIsMobile()">
+        <i class="far fa-compass mr-2"></i>Begin te wandellen!
+      </button>
 
-        <qrcode [level]="2" [qrvalue]="basePath + 'wandelingen/' + walk.slug" *ngIf="!deviceIsMobile()"></qrcode>
-      </div>
+      <qrcode [level]="2" [qrvalue]="basePath + 'wandelingen/' + walk.slug" *ngIf="!deviceIsMobile()"></qrcode>
     </div>
   </div>
 </div>
+
 
 <ng-template #loading>
   <app-loader></app-loader>

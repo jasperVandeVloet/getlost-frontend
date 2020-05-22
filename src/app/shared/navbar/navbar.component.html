@@ -21,15 +21,11 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/wandelingen"
-            (click)="isCollapsed = !isCollapsed">Ontdek</a>
+            (click)="isCollapsed = !isCollapsed">Ontdek het aanbod</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="/hoe-werkt-het"
             (click)="isCollapsed = !isCollapsed">Hoe werkt het?</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/contact"
-            (click)="isCollapsed = !isCollapsed">Contact</a>
         </li>
         <li class="nav-item" *ngIf="hasWalk()">
           <a class="nav-link" routerLinkActive="active" routerLink="/onderweg"
