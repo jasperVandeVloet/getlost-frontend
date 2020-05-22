@@ -29,5 +29,9 @@ export class ApiService {
     return this.http.get(this.basePath + 'homepage');
   }
 
+  public getHowItWorksPage() {
+    return this.http.get(this.basePath + 'how-it-works');
+  }
+
 
 }

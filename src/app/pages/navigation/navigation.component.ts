@@ -57,7 +57,7 @@ export class NavigationComponent implements OnInit {
    */
   protected getDataFromStorage(): void {
 
-    if (localStorage.getItem('checkpoints') === null || localStorage.getItem('walk') === null) {
+    if ((localStorage.getItem('checkpoints') === null) || (localStorage.getItem('walk') === null)) {
       localStorage.clear();
       // redirect
       this.router.navigate(['/wandelingen']);
@@ -133,7 +133,7 @@ export class NavigationComponent implements OnInit {
     }
     // }
     // else {
-    //   alert('Please use your phone');
+    //   this.router.navigate(['/']);
     // }
   }
 

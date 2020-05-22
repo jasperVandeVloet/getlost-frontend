@@ -1,0 +1,7 @@
+<div class="how-it-works">
+    <img src="{{ content?.header.url }}" alt="" class="header-img">
+  <div class="container mt-4">
+    <h1>{{ content?.title }}</h1>
+    <showdown [value]="content?.body" class="w-100"></showdown>
+  </div>
+</div>
