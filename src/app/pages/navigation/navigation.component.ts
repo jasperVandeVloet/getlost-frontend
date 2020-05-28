@@ -279,6 +279,7 @@ export class NavigationComponent implements OnInit {
    * Calculate angle against north,
    * manipulate this so it matches to device position
    */
+
   public setArrowAngle(deviceAngle): void {
     const begin: Coordinate = this.currentLocation;
     const endY: Coordinate = {
@@ -309,7 +310,7 @@ export class NavigationComponent implements OnInit {
       alpha = 360 - alpha;
     }
 
-    // Android angle is clockwise, iOs uses angle counter clockwise
+    // Android angle is counter clockwise, iOs uses angle clockwise
     if (this.device.getOsData().os === 'Android') {
       alpha = Math.floor(alpha + deviceAngle);
     }

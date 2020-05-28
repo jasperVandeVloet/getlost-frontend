@@ -50,12 +50,10 @@
 
     <div class="disclaimer font-weight-bold" *ngIf="deviceIsMobile()">
       <p>
-        Om de volledige ervaring van de wandeling te kunnen beleven zal er bij het begin de wandelling toestemming
-        tot je locatie en bewegingsensoren van je toestel worden gevraagt. We slagen ook enkele gegevens op in je
-        cache voor de voortgang van de wandeling.
-      </p>
-      <p>Dit wil niet zeggen dat we jou kunnen volgen of je gegevens doorverkopen of wat dan ook. Deze worden enkel
-        opgeslagen op jouw toestel. Niet op onze servers. Door verder te gaan, verkklaar je je hiermee akkoord</p>
+        Om de volledige ervaring van de wandeling te kunnen beleven zal er bij het begin de wandeling toestemming
+        tot je locatie en bewegingsensoren van je toestel worden gevraagd. We slagen ook enkele gegevens op voor de voortgang van de wandeling.<br>
+        Dit wil niet zeggen dat we jou kunnen volgen of je gegevens doorverkopen of wat dan ook. Deze worden enkel
+        opgeslagen op jouw toestel, niet op onze servers. Door verder te gaan, ga je hiermee akkoord</p>
     </div>
 
     <div class="disclaimer font-weight-bold" *ngIf="!deviceIsMobile()">
@@ -68,7 +66,7 @@
     <div class="text-center">
 
       <button class="btn btn-primary my-4 px-4 py-2" (click)="startWalking()" *ngIf="deviceIsMobile()">
-        <i class="far fa-compass mr-2"></i>Begin te wandellen!
+        <i class="far fa-compass mr-2"></i>Begin te wandelen!
       </button>
 
       <qrcode [level]="2" [qrvalue]="basePath + 'wandelingen/' + walk.slug" *ngIf="!deviceIsMobile()"></qrcode>
@@ -85,10 +83,10 @@
   <div class="modal-body py-5 text-center">
     <h5>Je hebt onderstaande wandeling nog niet afgerond.</h5>
     <p class="font-italic my-3">{{ getWalkFromStorage() }}</p>
-    <h5>Weet je zeker dat je een nieuwe wil starten?</h5>
+    <h5>Weet je zeker dat je een nieuwe wandeling wil starten?</h5>
     <div class="text-right">
-      <button type="button" class="btn btn-primary mx-2 mt-4" (click)="confirm()">Ga verder</button>
-      <button type="button" class="btn btn-secondary mx-2 mt-4" (click)="decline()">Keer terug</button>
+      <button type="button" class="btn btn-primary mx-2 mt-4" (click)="confirm()">Ja</button>
+      <button type="button" class="btn btn-secondary mx-2 mt-4" (click)="decline()">Nee, keer terug</button>
     </div>
   </div>
 </ng-template>
