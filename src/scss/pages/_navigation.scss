@@ -1,10 +1,10 @@
 .navigation {
-  // height: 100vh;
+  height: 80vh;
   max-width: 576px;
   margin: auto;
 
   .compas {
-    height: 60vh;
+    height: 57vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,6 +42,7 @@
       font-size: 4rem;
       font-weight: bold;
       line-height: 2.5rem;
+      position: relative;
     }
 
     .progress {
