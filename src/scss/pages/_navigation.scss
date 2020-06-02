@@ -38,12 +38,23 @@
     width: 90%;
     margin: auto;
 
-    h1{
-      font-size: 4rem;
-      font-weight: bold;
-      line-height: 2.5rem;
-      position: relative;
+    .distance {
+        position: relative;
+        margin-bottom: 2em;
+        h1{
+            font-size: 4rem;
+            font-weight: bold;
+            // line-height: 2rem;
+            // z-index: 3;
+          }
+
+          h2 {
+              position: absolute;
+              bottom: -2rem;
+          }
     }
+
+
 
     .progress {
       height: 1.5rem;
