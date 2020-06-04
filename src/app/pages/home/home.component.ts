@@ -16,7 +16,7 @@ declare var Rellax: any;
 
 export class HomeComponent implements OnInit {
   public content;
-  // public rellax;
+  public rellax;
   // public options: AnimationOptions = {
   //   // path: 'https://assets3.lottiefiles.com/packages/lf20_ZWEJL5.json',
   //   path: '/assets/json/loading.json',
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.rellax = new Rellax('.rellax');
+    this.rellax = new Rellax('.rellax');
     this.setTitle('Get Lost - Home');
 
     this.api.getHomepage().subscribe(res => this.content = res);
