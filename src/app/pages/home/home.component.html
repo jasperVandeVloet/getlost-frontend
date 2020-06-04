@@ -1,6 +1,7 @@
 <div class="home">
   <div class="hero">
     <img src="/assets/img/hero.jpg" alt="" class="hero">
+    <!-- <img src="/assets/svg/logo-light.svg" alt="Get Lost logo" class="logo"> -->
   </div>
 
   <div *ngIf="content?.id; else loading">
@@ -9,7 +10,7 @@
         <div class="quote row">
           <div class="col-10">
             <h3 class="quote-sentence">{{ content?.quote }}</h3>
-            <!-- <p class="quote-author">Plato</p> -->
+            <p class="quote-author font-italic">{{ content?.qoute_author }}</p>
           </div>
         </div>
       </div>

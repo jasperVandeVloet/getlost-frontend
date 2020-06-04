@@ -14,6 +14,7 @@ import { LocationService } from 'src/app/service/location.service';
   templateUrl: './walks.component.html'
 })
 export class WalksComponent implements OnInit {
+  public content;
   public isCollapsed = true;
   public walks: Walk[];
   public filteredWalks: Walk[];
@@ -62,6 +63,7 @@ export class WalksComponent implements OnInit {
 
   ngOnInit(): void {
     this.setWindow('Get Lost - Overzicht');
+    this.api.getWalksPage().subscribe(res => this.content = res);
     this.getWalks();
     // console.log(this.filterForm.value);
 

@@ -33,5 +33,9 @@ export class ApiService {
     return this.http.get(this.basePath + 'how-it-works');
   }
 
+  public getWalksPage() {
+    return this.http.get(this.basePath + 'walkspage');
+  }
+
 
 }
