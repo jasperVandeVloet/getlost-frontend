@@ -5,12 +5,26 @@
       <div class="elipse"></div>
       <img src="/assets/svg/arrow.svg" alt="arrow" class="direction"
         [ngStyle]="{'transform': 'rotate(' + destinationAngle + 'deg)'}">
+
+      <div class="debug small p-1 border border-rounded">
+        <p class="text-uppercase">Debugging</p>
+        <!-- <p>current location:</p>
+          <p>{{ currentLocation?.latitude }}, {{ currentLocation?.longitude }}</p>
+          <p>destination:</p>
+          <p>{{ destination.coordinate?.latitude }}, {{ destination.coordinate?.longitude }}</p>
+          <p>location accuracy:</p>
+          <p>{{ distanceAccuracy }}m</p>
+          <p>angle accuracy:</p>
+          <p>{{ angleAccuracy }}°</p>
+          <p>{{ error }}</p> -->
+        <button class="btn btn-primary mx-2" (click)="arrivedAtCheckpoint()">at Checkpoint</button>
+        <button class="btn btn-danger mx-2" (click)="clearStorage()">RESET</button>
+      </div>
     </div>
 
     <div class="data">
       <div class="distance">
-        <h1 *ngIf="distance < 1000">{{ distance }}m</h1>
-        <h1 *ngIf="distance >= 1000">{{ distance / 1000 }}km</h1>
+        <h1>{{ distanceString }}</h1>
         <h2 class="text-uppercase">tot checkpoint</h2>
       </div>
 
@@ -21,19 +35,4 @@
       </progressbar>
     </div>
   </div>
-
-  <!-- <div class="debug small p-1">
-    <p>Debugging</p>
-    <p>current location:</p>
-    <p>{{ currentLocation?.latitude }}, {{ currentLocation?.longitude }}</p>
-    <p>destination:</p>
-    <p>{{ destination.coordinate?.latitude }}, {{ destination.coordinate?.longitude }}</p>
-    <p>location accuracy:</p>
-    <p>{{ distanceAccuracy }}m</p>
-    <p>angle accuracy:</p>
-    <p>{{ angleAccuracy }}°</p>
-    <p>{{ error }}</p>
-    <button class="btn btn-primary d-block my-2" (click)="arrivedAtCheckpoint()">at Checkpoint</button>
-    <button class="btn btn-danger d-block my-2" (click)="clearStorage()">RESET</button>
-  </div> -->
 </div>

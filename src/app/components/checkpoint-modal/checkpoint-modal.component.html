@@ -1,12 +1,41 @@
-<div class="modal-header">
-  <h5 class="modal-title mx-auto font-weight-bold">{{title}}</h5>
-</div>
-<img src="{{ checkpoint.img.url }}" alt="{{ checkpoint.img.name }}" class="w-100">
-<div class="modal-body">
-  <h5 class="font-weight-bold ">{{ checkpoint.title }}</h5>
-  <showdown [value]="checkpoint.description" class="w-100"></showdown>
+<div class="checkpoint-modal">
+  <div class="modal-header">
+    <h5 class="modal-title mx-auto font-weight-bold">{{title}}</h5>
+  </div>
+  <img src="{{ checkpoint.img.url }}" alt="{{ checkpoint.img.name }}" class="w-100">
+  <div class="modal-body">
+    <h5 class="font-weight-bold ">{{ checkpoint.title }}</h5>
+    <showdown [value]="checkpoint.description" class="w-100"></showdown>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary mx-auto" (click)="bsModalRef.hide()" *ngIf="!finish"><i
+        class="far fa-compass mr-2"></i>{{closeBtnName}}
+    </button>
 
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-primary mx-auto" (click)="bsModalRef.hide()"><i class="far fa-compass mr-2"></i>{{closeBtnName}}</button>
+    <div class="d-flex justify-content-center mt-4" *ngIf="finish">
+      <div class="finish">
+        <h3 class="font-weight-bold text-center mb-4">Profiat! Je hebt het gehaald!</h3>
+        <h4 class="text-center font-weight-bold">Deel deze wandeling</h4>
+        <div class="share col-auto d-flex align-items-center justify-content-center mb-4">
+          <a class="btn btn-link" href="https://facebook.com/sharer/sharer.php?u={{ pathAsVar }}" target="_blank"
+            rel="noopener" aria-label="">
+            <i class="fab fa-facebook"></i>
+          </a>
+          <a class="btn btn-link"
+            href="https://twitter.com/intent/tweet/?text=Ontdek%20verborgen%20parels%20in%20je%20buurt.&amp;url={{ pathAsVar }}"
+            target="_blank" rel="noopener" aria-label="">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a class="btn btn-link"
+            href="mailto:?subject=Ontdek%20verborgen%20parels%20in%20je%20buurt.&amp;body={{ pathAsVar }}"
+            target="_self" rel="noopener" aria-label="">
+            <i class="far fa-envelope"></i>
+          </a>
+        </div>
+        <h4 class="font-weight-bold text-center text-uppercase">Wat wil je doen?</h4>
+        <button class="btn btn-primary btn-block" (click)="returnToStart(true)">Keer terug naar eerste punt</button>
+        <button class="btn btn-secondary btn-block" (click)="returnToStart(false)">Stop wandeling</button>
+      </div>
+    </div>
+  </div>
 </div>

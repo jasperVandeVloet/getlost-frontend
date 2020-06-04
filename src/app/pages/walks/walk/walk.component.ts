@@ -96,6 +96,7 @@ export class WalkComponent implements OnInit {
     localStorage.clear();
 
     localStorage.setItem('walk', this.walk.title);
+    localStorage.setItem('slug', this.walk.slug);
     localStorage.setItem('checkpoints', JSON.stringify(this.walk.checkpoint));
 
     this.router.navigate(['onderweg']);

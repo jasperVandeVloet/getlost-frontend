@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Checkpoint } from 'src/app/models/checkpoint';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-checkpoint-modal',
@@ -10,18 +11,29 @@ import { Checkpoint } from 'src/app/models/checkpoint';
 export class CheckpointModalComponent implements OnInit {
   public checkpoint: Checkpoint;
   public title: string;
-  public closeBtnName: string;
-  constructor(public bsModalRef: BsModalRef) { }
+  protected slug: string;
+  public closeBtnName: string; // MAG WEG
+  public finish = false;
+  protected specialEffect = new Audio();
+  public pathAsVar = environment.frontendVariablePath;
+
+  @Output() event = new EventEmitter<boolean>();
+
+  constructor(public bsModalRef: BsModalRef) {}
 
   ngOnInit(): void {
     this.playAudio();
+    this.pathAsVar = environment.frontendVariablePath + '%2Fwandelingen%2F' + this.slug;
   }
 
   protected playAudio() {
-    const audio = new Audio();
-    audio.src = '/assets/audio/arrived.wav';
-    audio.load();
-    audio.play();
+    this.specialEffect.pause();
+    this.specialEffect.src = '/assets/audio/soundeffect.wav';
+    this.specialEffect.play();
+  }
+
+  public returnToStart(agreed: boolean) {
+    this.event.emit(agreed);
   }
 
 }

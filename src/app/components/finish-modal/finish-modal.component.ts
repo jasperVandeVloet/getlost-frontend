@@ -11,7 +11,8 @@ export class FinishModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.audio = new Audio();
-    this.audio.src = '/assets/audio/finish.wav';
+    this.audio.play();
+    this.audio.src = '/assets/audio/soundeffect.wav';
     this.playAudio();
   }
 

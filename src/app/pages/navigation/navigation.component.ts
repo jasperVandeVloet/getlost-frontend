@@ -19,12 +19,14 @@ export class NavigationComponent implements OnInit {
   protected optionsHighAccuracy = { maximumAge: 600000, timeout: 5000, enableHighAccuracy: true };
   protected optionsLowAccuracy = { maximumAge: 600000, timeout: 10000, enableHighAccuracy: false };
   protected fenceRadius = 25; // radius of how close to get to checkpoint in m.
+  protected onWayBack = false;
 
   public checkpoints: Checkpoint[];
   public destinationAngle = 0;
   public currentLocation: Coordinate = { latitude: 0, longitude: 0 };
   public destination: Checkpoint;
   public distance: number;
+  public distanceString = '\u221e';
   public walkTitle: string;
   public currentCheckpoint = 0;
 
@@ -78,40 +80,26 @@ export class NavigationComponent implements OnInit {
    * If current is already set, this means a user was walking and is now returning, so we go further from current.
    */
   protected setCurrentCheckpoint(atCheckpoint?: boolean): void {
-    // console.log('NavigationComponent -> setCurrentCheckpoint -> setCurrentCheckpoint CALLED');
     // If nothing in storage
     if (localStorage.getItem('current') === null) {
-      // console.log('INITIALIZE CURRENT (should be 0)', this.currentCheckpoint);
       this.currentCheckpoint = 0;
-      // console.log('SET CHECKPOINT TO LOCALSTORAGE PRE', localStorage.getItem('current'));
       localStorage.setItem('current', this.currentCheckpoint.toString());
-      // console.log('SET CHECKPOINT TO LOCALSTORAGE POST', localStorage.getItem('current'));
     }
     // if function called at checkpoint
     else if (atCheckpoint) {
-      // console.log('CURRENT ++ PRE', this.currentCheckpoint);
       this.currentCheckpoint++;
-      // console.log('CURRENT ++ POST', this.currentCheckpoint);
-      // console.log('SET CHECKPOINT TO LOCALSTORAGE PRE', localStorage.getItem('current'));
       localStorage.setItem('current', this.currentCheckpoint.toString());
-      // console.log('SET CHECKPOINT TO LOCALSTORAGE POST', localStorage.getItem('current'));
     }
     // if not at checkpoint, but has current so user started walking before
     else {
       this.currentCheckpoint = parseInt(localStorage.getItem('current'), 10);
     }
 
-    // tslint:disable-next-line: max-line-length
-    // console.log('NavigationComponent -> setCurrentCheckpoint -> this.currentCheckpoint', this.currentCheckpoint, '/', this.checkpoints.length);
-
     if (this.currentCheckpoint < this.checkpoints.length) {
-      // console.log(this.currentCheckpoint, 'kleiner dan', this.checkpoints.length);
       this.destination = this.checkpoints[this.currentCheckpoint];
-      // console.log('NIEUWE CHECKPOINT GEKOZEN = ', this.checkpoints[this.currentCheckpoint].title);
     }
     else if (this.currentCheckpoint === this.checkpoints.length) {
-      // console.log('FINISH', this.currentCheckpoint, '/', this.checkpoints.length);
-      this.finishWalk();
+      // this.finishWalk();
     }
 
   }
@@ -121,17 +109,17 @@ export class NavigationComponent implements OnInit {
    */
   protected getDataFromDevice(): void {
     // if (this.device.getBrowserData().mobile === true) {
-      if (this.device.hasLocation()) {
-        if (this.device.hasOrientation()) {
-          this.getGeolocation();
-          this.getOrientation();
-        } else {
-          alert('Device Orientation API not supported.');
-        }
+    if (this.device.hasLocation()) {
+      if (this.device.hasOrientation()) {
+        this.getGeolocation();
+        this.getOrientation();
       } else {
-        alert('Device Geolocation API not supported.');
+        alert('Device Orientation API not supported.');
       }
-   // }
+    } else {
+      alert('Device Geolocation API not supported.');
+    }
+    // }
     // else {
     //   this.router.navigate(['/']);
     // }
@@ -161,6 +149,13 @@ export class NavigationComponent implements OnInit {
 
     if (this.destination.coordinate !== undefined) {
       this.distance = this.location.calculateDistance(this.currentLocation, this.destination.coordinate);
+
+      if (this.distance > 1000) {
+        this.distanceString = (this.distance / 1000 + 'km').replace('.', ',');
+      }
+      else {
+        this.distanceString = this.distance + 'm';
+      }
     }
     else {
       this.error = 'No destination set.';
@@ -169,7 +164,6 @@ export class NavigationComponent implements OnInit {
     if (this.distance < this.fenceRadius) {
       this.arrivedAtCheckpoint();
     }
-    // this.setArrowAngle();
   }
 
   /**
@@ -333,15 +327,23 @@ export class NavigationComponent implements OnInit {
   }
 
   public arrivedAtCheckpoint(): void {
-    this.openCheckpointModal();
-    this.setCurrentCheckpoint(true);
-    console.log('* AT CHECKPOINT set to next* current = ', this.currentCheckpoint);
+    if (!this.onWayBack) {
+      this.openCheckpointModal();
+      this.setCurrentCheckpoint(true);
+    }
+    else {
+      this.bsModalRef = this.modalService.show(FinishModalComponent, { class: 'modal-dialog-centered', animated: true });
+      this.modalService.onHidden.subscribe(() => {
+        this.finishWalk();
+      });
+    }
   }
 
   protected openCheckpointModal() {
     const initialState = {
       checkpoint: this.checkpoints[this.currentCheckpoint],
-      title: this.walkTitle
+      title: this.walkTitle,
+      slug: localStorage.getItem('slug')
     };
 
     this.bsModalRef = this.modalService.show(CheckpointModalComponent, { initialState, class: 'modal-dialog-centered', animated: true });
@@ -351,18 +353,39 @@ export class NavigationComponent implements OnInit {
     }
     else if (this.currentCheckpoint + 1 === this.checkpoints.length) {
       this.bsModalRef.content.closeBtnName = 'Einde';
+      this.bsModalRef.content.finish = true;
     }
     else {
       this.bsModalRef.content.closeBtnName = 'Naar het volgende punt';
     }
+
+    this.bsModalRef.content.event.subscribe(res => {
+      console.log(res);
+
+      if (res) {
+        console.log('return to start');
+        this.returnToStart();
+        this.bsModalRef.hide();
+      }
+      else {
+        console.log('stop');
+        this.bsModalRef.hide();
+        this.finishWalk();
+      }
+    });
   }
 
   protected finishWalk() {
-    this.bsModalRef = this.modalService.show(FinishModalComponent, { class: 'modal-dialog-centered', animated: true });
-    this.modalService.onHidden.subscribe(() => {
-      // localStorage.clear();
-      // this.router.navigate(['/']);
-    });
+    localStorage.clear();
+    this.router.navigate(['/']);
+  }
+
+  protected returnToStart() {
+    this.checkpoints = JSON.parse(localStorage.getItem('checkpoints'));
+    this.checkpoints.push(this.checkpoints[0]);
+    console.log('NavigationComponent -> returnToStart -> this.checkpoints', this.checkpoints);
+    this.setCurrentCheckpoint();
+    this.onWayBack = true;
   }
 
   /**
