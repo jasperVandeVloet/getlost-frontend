@@ -68,7 +68,7 @@ export class WalksComponent implements OnInit {
   }
 
   protected setFilterState() {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth >= 768) {
       // md-breakpoint
       this.isCollapsed = false;
     }
