@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {  Router } from '@angular/router';
 
 import { environment } from '../../../environments/environment';
+import { HelperService } from 'src/app/service/helper.service';
 
 @Component({
   selector: 'app-footer',
@@ -14,9 +15,11 @@ export class FooterComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private helper: HelperService
   ) { }
 
   ngOnInit(): void {
+    this.helper.preparePage();
   }
 
   public hideFooterOn(url: string): boolean {

@@ -1,54 +1,56 @@
 html, body, .wrapper {
-  height: 100%;
+    height: 100%;
 }
 
 html, body, .wrapper, .topo-light, .modal-content {
-  background-image: url('/assets/svg/topo.svg');
-  background-repeat: repeat;
+    background-image: url('/assets/svg/topo.svg');
+    background-repeat: repeat;
+    background-color: $light;
 }
 
 .topo-dark, .modal-backdrop {
-  background-image: url('/assets/svg/topo-dark.svg');
-  background-repeat: repeat;
-  background-color: $dark;
-  background-size: 25%;
-  -webkit-box-shadow: -4px 4px 10px -4px $dark;
-  -moz-box-shadow: -4px 4px 10px -4px $dark;
-  box-shadow: -4px 4px 10px -4px $dark;
+    background-image: url('/assets/svg/topo-dark.svg');
+    background-repeat: repeat;
+    background-color: $dark;
+    background-size: 25%;
+    -webkit-box-shadow: -4px 4px 10px -4px $dark;
+    -moz-box-shadow: -4px 4px 10px -4px $dark;
+    box-shadow: -4px 4px 10px -4px $dark;
 }
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  max-width: 2500px;
-  margin: auto;
 
-  .content {
-    flex: 1 0 auto;
-  }
-  .footer {
-    flex-shrink: 0;
-  }
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 2560px;
+    margin: auto;
+
+    .content {
+        flex: 1 0 auto;
+    }
+    .footer {
+        flex-shrink: 0;
+    }
 }
 
 h4 {
-  white-space: normal;
+    white-space: normal;
 }
 
 ul {
-  list-style: none;
-  padding-left: 0;
+    list-style: none;
+    padding-left: 0;
 }
 
 .logo {
     width: 150px;
-  }
+}
 
 // Buttons
 
 .btn {
-  text-transform: uppercase;
-  font-weight: bold;
-  white-space: normal;
+    text-transform: uppercase;
+    font-weight: bold;
+    white-space: normal;
 }
 
 .btn-link:hover {
@@ -56,15 +58,15 @@ ul {
 }
 
 showdown {
-  img {
-    width: 100%;
-    margin: 1em 0;
-    border-radius: $border-radius-left;
-  }
+    img {
+        width: 100%;
+        margin: 1em 0;
+        border-radius: $border-radius-left;
+    }
 
-  h1, h2, h3, h4 {
-      font-style: italic;
-  }
+    h1, h2, h3, h4 {
+        font-style: italic;
+    }
 }
 
 .modal-content {
@@ -74,9 +76,10 @@ showdown {
 
 .header {
     width: 100%;
-    max-width: 2000px;
+    // max-width: 2000px;
     height: 300px;
     position: relative;
+    margin: auto;
 
     .header-img {
         height: 100%;
@@ -122,6 +125,7 @@ showdown {
         }
     }
 }
+
 
 
 

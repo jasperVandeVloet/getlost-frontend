@@ -1,58 +1,56 @@
 <div class="home">
-  <div class="hero">
-    <img src="/assets/img/hero.jpg" alt="" class="hero-img">
-    <img src="/assets/img/layer-1.png" alt="" class="parallax-el rellax" data-rellax-speed="0">
-    <div class="logo">
-      <div class="container">
-        <img src="/assets/img/logo-dark.png" alt="Get Lost logo" class="rellax parallax-logo" data-rellax-speed="-4">
-      </div>
-    </div>
-
-
-  </div>
-
-  <div *ngIf="content?.id; else loading">
-    <div class="overlay topo-dark text-light py-4">
-      <div class="container">
-        <div class="quote row">
-          <div class="col-10">
-            <h3 class="quote-sentence">{{ content?.quote }}</h3>
-            <p class="quote-author font-italic">{{ content?.qoute_author }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="header rellax" data-rellax-speed="-4" data-rellax-xs-speed="-3" data-rellax-mobile-speed="-2"
+    data-rellax-tablet-speed="-3" data-rellax-desktop-speed="-12">
+    <img src="/assets/img/hero.jpg" alt="river in the forest" class="header-img">
     <div class="container">
-      <div class="introduction mt-4">
-        <showdown [value]="content.introduction" class="w-100"></showdown>
-      </div>
-      <div class="blog my-5" *ngFor="let item of content?.blog; odd as isOdd; even as isEven">
-        <div class="row" *ngIf="isEven">
-          <div class="col-lg-5 col-md-6 col-12 mb-3 mb-md-0">
-            <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img shadow-right">
-          </div>
-          <div class="col d-flex flex-column justify-content-start">
-            <h4 class="blog-title font-italic">{{ item.title }}</h4>
-            <p class="blog-text">{{ item.description }}</p>
+      <img src="/assets/img/logo-dark.png" alt="Get Lost logo" class="logo rellax">
+    </div>
+  </div>
 
-            <a class="btn btn-primary align-self-sm-center" href="{{ item.cta.path}}">{{ item.cta.text }}</a>
+  <div class="rellax topo-light">
+    <img src="/assets/img/layer-1.png" alt="mother and child" class="rellax rellax-layer" data-rellax-speed="-1">
+    <div *ngIf="content?.id; else loading">
+      <div class="overlay topo-dark text-light py-4">
+        <div class="container">
+          <div class="quote row">
+            <div class="col-10">
+              <h3 class="quote-sentence">{{ content?.quote }}</h3>
+              <p class="quote-author font-italic">{{ content?.qoute_author }}</p>
+            </div>
           </div>
         </div>
+      </div>
+      <div class="container">
+        <div class="introduction mt-4">
+          <showdown [value]="content.introduction" class="w-100"></showdown>
+        </div>
+        <div class="blog my-5" *ngFor="let item of content?.blog; odd as isOdd; even as isEven">
+          <div class="row" *ngIf="isEven">
+            <div class="col-lg-5 col-md-6 col-12 mb-3 mb-md-0">
+              <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img shadow-right">
+            </div>
+            <div class="col d-flex flex-column justify-content-start">
+              <h4 class="blog-title font-italic">{{ item.title }}</h4>
+              <p class="blog-text">{{ item.description }}</p>
 
-        <div class="row" *ngIf="isOdd">
-          <div class="col d-flex flex-column justify-content-start order-md-1 order-2">
-            <h4 class="blog-title font-italic">{{ item.title }}</h4>
-            <p class="blog-text">{{ item.description }}</p>
-            <a class="btn btn-primary align-self-sm-center" href="{{ item.cta.path}}">{{ item.cta.text }}</a>
+              <a class="btn btn-primary align-self-sm-center" href="{{ item.cta.path}}">{{ item.cta.text }}</a>
+            </div>
           </div>
-          <div class="col-lg-5 col-md-6 col-12 order-md-2 order-1 mb-3 mb-md-0">
-            <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img shadow-left">
+
+          <div class="row" *ngIf="isOdd">
+            <div class="col d-flex flex-column justify-content-start order-md-1 order-2">
+              <h4 class="blog-title font-italic">{{ item.title }}</h4>
+              <p class="blog-text">{{ item.description }}</p>
+              <a class="btn btn-primary align-self-sm-center" href="{{ item.cta.path}}">{{ item.cta.text }}</a>
+            </div>
+            <div class="col-lg-5 col-md-6 col-12 order-md-2 order-1 mb-3 mb-md-0">
+              <img src="{{item.image.url}}" alt="{{item.title}}" class="blog-img shadow-left">
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
   <ng-template #loading>
     <app-loader></app-loader>
   </ng-template>

@@ -1,103 +1,108 @@
 <div class="walks">
-  <div class="header">
+
+  <div class="header rellax" data-rellax-speed="-4" data-rellax-xs-speed="-3" data-rellax-mobile-speed="-2" data-rellax-tablet-speed="-3" data-rellax-desktop-speed="-3">
     <img src="{{ content?.image.url}}" alt="" class="header-img">
     <div class="container">
-      <img src="/assets/svg/logo-light.svg" alt="Get Lost logo" class="logo">
-    </div>
-  </div>
-  <div class="topo-dark">
-    <div class="container text-light py-3">
-      <h2 class="font-italic">{{ content?.title }}</h2>
+      <img src="/assets/svg/logo-light.svg" alt="Get Lost logo" class="logo rellax">
     </div>
   </div>
 
-  <div class="container">
-    <div class="introduction mt-5">
-      {{ content?.introduction }}
-    </div>
-    <div class="row mt-5">
-      <aside class="col-12 col-md-4 mb-4 mb-md-0">
-        <button class="btn btn-primary d-block d-md-none mb-3" type="button" (click)="isCollapsed = !isCollapsed"
-          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseFilter">
-          <i class="fas fa-filter"></i>
-          <span class="ml-2">Filters</span>
-        </button>
-
-        <div class="filter p-4" id="collapseFilter" [collapse]="isCollapsed" [isAnimated]="true">
-          <h4 class="text-uppercase mb-4 text-primary d-none d-md-block">
-            <i class="fas fa-filter"></i>
-            <span class="ml-2">Filters</span>
-          </h4>
-          <form [formGroup]="filterForm">
-            <div class="form-group mb-4">
-              <p class="mb-2 text-uppercase font-weight-bold">Provincie:</p>
-              <div class="form-check align-items-start mb-1" *ngFor="let item of provinces">
-                <input class="form-check-input mt-1" type="checkbox" id="{{item}}"
-                  (change)="changeProvince($event, item)">
-                <label class="form-check-label text-capitalize" for="{{item}}">{{ item }}</label>
-              </div>
-            </div>
-
-            <div class="form-group mb-4">
-              <label for="difficulty" class="font-weight-bold text-uppercase"> Moeilijkheid: </label>
-              <div class="custom-slider">
-                <ng5-slider [options]="sliderOptions" formControlName="difficulty" (mouseup)="changeDifficulty($event)">
-                </ng5-slider>
-              </div>
-            </div>
-
-            <div class="form-group mb-4">
-              <p class="font-weight-bold text-uppercase mb-2">Geschikt voor:</p>
-              <div class="form-check form-check-inline align-items-start mb-1">
-                <input class="form-check-input mt-1" type="checkbox" id="kids_friendly" formControlName="kids_friendly"
-                  (change)="onToggle($event)">
-                <label class="form-check-label" for="kids_friendly">Kinderen (0-12 jaar)</label>
-              </div>
-              <div class="form-check form-check-inline align-items-start mb-1">
-                <input class="form-check-input mt-1" type="checkbox" id="wheelchair_friendly"
-                  formControlName="wheelchair_friendly" (change)="onToggle($event)">
-                <label class="form-check-label" for="wheelchair_friendly">Toegankelijk met rolstoelen</label>
-              </div>
-            </div>
-
-            <button class="btn btn-block btn-outline-primary mt-5" type="reset" (click)="resetFilter(initialFilter)">Wis
-              alle filters</button>
-          </form>
-        </div>
-      </aside>
-
-      <div class="main col-12 col-md-8">
-        <ul *ngIf="walks?.length > 0 ; else loading">
-          <li *ngFor="let walk of filteredWalks" class="mb-3">
-            <a href="wandelingen/{{walk.slug}}" class="btn btn-link w-100 p-0 walk">
-              <div class="walk-img">
-                <img src="{{walk.image.url}}" alt="{{walk.slug}}" class="w-100">
-              </div>
-              <div
-                class="walk-body text-left text-light pt-4 pb-3 px-4 d-flex flex-column justify-content-between w-100">
-                <h4>{{ walk.title }}</h4>
-
-                <div class="specs">
-                  <h5>{{ walk.checkpoint.length }} checkpoint<span *ngIf="walk.checkpoint.length != 1">s</span></h5>
-                  <div class="d-flex">
-                    <h5 class="m-0 mr-3" *ngIf="walk.distance > 0">{{ walk.distance }} km</h5>
-                    <h5 class="m-0"><i class="fas fa-baby-carriage pr-3" *ngIf="walk.kids_friendly"></i></h5>
-                    <h5 class="m-0"><i class="fas fa-wheelchair  pr-3" *ngIf="walk.wheelchair_friendly"></i></h5>
-                    <app-difficulty-rating class="rating" [difficulty]="walk.difficulty"></app-difficulty-rating>
-                  </div>
-                  <p class="m-0 small text-capitalize">{{ walk.province }}</p>
-                </div>
-              </div>
-
-            </a>
-          </li>
-        </ul>
-        <ng-template #loading>
-          <app-loader></app-loader>
-        </ng-template>
+  <div class="rellax">
+    <div class="topo-dark">
+      <div class="container text-light py-3">
+        <h2 class="font-italic">{{ content?.title }}</h2>
       </div>
     </div>
 
+    <div class="container">
+      <div class="introduction mt-5">
+        {{ content?.introduction }}
+      </div>
+      <div class="row mt-5">
+        <aside class="col-12 col-md-4 mb-4 mb-md-0">
+          <button class="btn btn-primary d-block d-md-none mb-3" type="button" (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseFilter">
+            <i class="fas fa-filter"></i>
+            <span class="ml-2">Filters</span>
+          </button>
 
+          <div class="filter p-4" id="collapseFilter" [collapse]="isCollapsed" [isAnimated]="true">
+            <h4 class="text-uppercase mb-4 text-primary d-none d-md-block">
+              <i class="fas fa-filter"></i>
+              <span class="ml-2">Filters</span>
+            </h4>
+            <form [formGroup]="filterForm">
+              <div class="form-group mb-4">
+                <p class="mb-2 text-uppercase font-weight-bold">Provincie:</p>
+                <div class="form-check align-items-start mb-1" *ngFor="let item of provinces">
+                  <input class="form-check-input mt-1" type="checkbox" id="{{item}}"
+                    (change)="changeProvince($event, item)">
+                  <label class="form-check-label text-capitalize" for="{{item}}">{{ item }}</label>
+                </div>
+              </div>
+
+              <div class="form-group mb-4">
+                <label for="difficulty" class="font-weight-bold text-uppercase"> Moeilijkheid: </label>
+                <div class="custom-slider">
+                  <ng5-slider [options]="sliderOptions" formControlName="difficulty"
+                    (mouseup)="changeDifficulty($event)">
+                  </ng5-slider>
+                </div>
+              </div>
+
+              <div class="form-group mb-4">
+                <p class="font-weight-bold text-uppercase mb-2">Geschikt voor:</p>
+                <div class="form-check form-check-inline align-items-start mb-1">
+                  <input class="form-check-input mt-1" type="checkbox" id="kids_friendly"
+                    formControlName="kids_friendly" (change)="onToggle($event)">
+                  <label class="form-check-label" for="kids_friendly">Kinderen (0-12 jaar)</label>
+                </div>
+                <div class="form-check form-check-inline align-items-start mb-1">
+                  <input class="form-check-input mt-1" type="checkbox" id="wheelchair_friendly"
+                    formControlName="wheelchair_friendly" (change)="onToggle($event)">
+                  <label class="form-check-label" for="wheelchair_friendly">Toegankelijk met rolstoelen</label>
+                </div>
+              </div>
+
+              <button class="btn btn-block btn-outline-primary mt-5" type="reset"
+                (click)="resetFilter(initialFilter)">Wis
+                alle filters</button>
+            </form>
+          </div>
+        </aside>
+
+        <div class="main col-12 col-md-8">
+          <ul *ngIf="walks?.length > 0 ; else loading">
+            <li *ngFor="let walk of filteredWalks" class="mb-3">
+              <a href="wandelingen/{{walk.slug}}" class="btn btn-link w-100 p-0 walk">
+                <div class="walk-img">
+                  <img src="{{walk.image.url}}" alt="{{walk.slug}}" class="w-100">
+                </div>
+                <div
+                  class="walk-body text-left text-light pt-4 pb-3 px-4 d-flex flex-column justify-content-between w-100">
+                  <h4>{{ walk.title }}</h4>
+
+                  <div class="specs">
+                    <h5>{{ walk.checkpoint.length }} checkpoint<span *ngIf="walk.checkpoint.length != 1">s</span></h5>
+                    <div class="d-flex">
+                      <h5 class="m-0 mr-3" *ngIf="walk.distance > 0">{{ walk.distance }} km</h5>
+                      <h5 class="m-0"><i class="fas fa-baby-carriage pr-3" *ngIf="walk.kids_friendly"></i></h5>
+                      <h5 class="m-0"><i class="fas fa-wheelchair  pr-3" *ngIf="walk.wheelchair_friendly"></i></h5>
+                      <app-difficulty-rating class="rating" [difficulty]="walk.difficulty"></app-difficulty-rating>
+                    </div>
+                    <p class="m-0 small text-capitalize">{{ walk.province }}</p>
+                  </div>
+                </div>
+
+              </a>
+            </li>
+          </ul>
+          <ng-template #loading>
+            <app-loader></app-loader>
+          </ng-template>
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>

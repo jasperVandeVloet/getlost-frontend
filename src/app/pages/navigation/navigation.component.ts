@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalService, BsModalRef, ModalDirective } from 'ngx-bootstrap/modal';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 import { DeviceService } from 'src/app/service/device.service';
 import { Coordinate } from 'src/app/models/coordinate';
 import { Checkpoint } from 'src/app/models/checkpoint';
 import { CheckpointModalComponent } from 'src/app/components/checkpoint-modal/checkpoint-modal.component';
 import { FinishModalComponent } from 'src/app/components/finish-modal/finish-modal.component';
-import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { LocationService } from 'src/app/service/location.service';
+import { HelperService } from 'src/app/service/helper.service';
 
 @Component({
   selector: 'app-navigation',
@@ -38,19 +38,15 @@ export class NavigationComponent implements OnInit {
   constructor(
     private device: DeviceService,
     private modalService: BsModalService,
-    private titleService: Title,
+    private helper: HelperService,
     private router: Router,
     private location: LocationService
   ) { }
 
   ngOnInit(): void {
+    this.helper.preparePage('Get Lost - Ergens onderweg');
     this.getDataFromStorage();
     this.getDataFromDevice();
-    this.setWindow('Get Lost - Ergens onderweg');
-  }
-
-  protected setWindow(newTitle: string) {
-    this.titleService.setTitle(newTitle);
   }
 
   /**

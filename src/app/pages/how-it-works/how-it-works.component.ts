@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { ApiService } from 'src/app/service/api.service';
+import { HelperService } from 'src/app/service/helper.service';
 
 @Component({
   selector: 'app-how-it-works',
@@ -8,18 +8,15 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class HowItWorksComponent implements OnInit {
   public content;
+
   constructor(
-    private titleService: Title,
     private api: ApiService,
+    private helper: HelperService
   ) { }
 
   ngOnInit(): void {
-    this.setTitle('Get Lost - Hoe het werkt');
+    this.helper.preparePage('Get Lost - Hoe het werkt');
     this.api.getHowItWorksPage().subscribe(res => this.content = res);
-  }
-
-  protected setTitle(newTitle: string) {
-    this.titleService.setTitle(newTitle);
   }
 
 }

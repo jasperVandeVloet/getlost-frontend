@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -8,6 +7,7 @@ import { ApiService } from 'src/app/service/api.service';
 import { Walk } from 'src/app/models/walk';
 import { DeviceService } from 'src/app/service/device.service';
 import { environment } from 'src/environments/environment';
+import { HelperService } from 'src/app/service/helper.service';
 
 @Component({
   selector: 'app-walk',
@@ -27,7 +27,7 @@ export class WalkComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private api: ApiService,
-    private titleService: Title,
+    private helper: HelperService,
     private device: DeviceService,
     private modalService: BsModalService
   ) { }
@@ -40,14 +40,10 @@ export class WalkComponent implements OnInit {
     });
   }
 
-  protected setWindow(newTitle: string) {
-    this.titleService.setTitle(newTitle);
-  }
-
   private getWalk(slug: string): void {
     this.api.getWalk(slug).subscribe((res) => {
       this.walk = res;
-      this.setWindow('Get Lost - ' + res.title);
+      this.helper.preparePage('Get Lost - ' + res.title);
       console.log('WalkComponent -> getWalk -> res', res);
     });
   }

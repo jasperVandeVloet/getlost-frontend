@@ -1,29 +1,28 @@
-<div class="how-it-works">
-  <div *ngIf="content?.id; else loading">
-    <div class="header">
+<div class="how-it-works mb-5 pb-5">
+    <div class="header rellax" data-rellax-speed="-4" data-rellax-xs-speed="-3" data-rellax-mobile-speed="-2" data-rellax-tablet-speed="-3" data-rellax-desktop-speed="-4">
       <img src="{{ content?.header.url }}" alt="" class="header-img">
       <div class="container">
-        <img src="/assets/svg/logo-light.svg" alt="Get Lost logo" class="logo">
-      </div>
-    </div>
-    <div class="topo-dark">
-      <div class="container text-light py-3">
-        <h1 class="font-italic">{{ content?.title }}</h1>
+        <img src="/assets/svg/logo-light.svg" alt="Get Lost logo" class="logo rellax">
       </div>
     </div>
 
-    <div class="container mt-4">
+    <div class="rellax mb-4">
+      <div class="topo-dark">
+        <div class="container text-light py-3">
+          <h1 class="font-italic">{{ content?.title }}</h1>
+        </div>
+      </div>
 
-      <showdown [value]="content?.body" class="w-100"></showdown>
+      <div class="container mt-4">
+        <showdown [value]="content?.body" class="w-100"></showdown>
+      </div>
     </div>
-  </div>
 
-  <ng-template #loading>
+  <ng-template #loading *ngIf="!content?.id;">
     <div class="row w-100 loader">
       <div class="col h-100">
         <app-loader></app-loader>
       </div>
     </div>
-
   </ng-template>
 </div>

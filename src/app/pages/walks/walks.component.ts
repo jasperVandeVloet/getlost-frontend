@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Options } from 'ng5-slider';
 
 import { ApiService } from 'src/app/service/api.service';
 import { Walk } from 'src/app/models/walk';
 import { LocationService } from 'src/app/service/location.service';
-
+import { HelperService } from 'src/app/service/helper.service';
 
 @Component({
   selector: 'app-walks',
@@ -57,21 +56,18 @@ export class WalksComponent implements OnInit {
   constructor(
     private api: ApiService,
     private fb: FormBuilder,
-    private titleService: Title,
-    private location: LocationService
+    private location: LocationService,
+    private helper: HelperService
   ) { }
 
   ngOnInit(): void {
-    this.setWindow('Get Lost - Overzicht');
+    this.helper.preparePage('Get Lost - Overzicht');
+    this.setFilterState();
     this.api.getWalksPage().subscribe(res => this.content = res);
     this.getWalks();
-    // console.log(this.filterForm.value);
-
   }
 
-  protected setWindow(newTitle: string) {
-    this.titleService.setTitle(newTitle);
-
+  protected setFilterState() {
     if (window.innerWidth > 768) {
       // md-breakpoint
       this.isCollapsed = false;
