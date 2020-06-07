@@ -4,11 +4,11 @@
     <div class="text-center compas">
       <div class="elipse"></div>
       <img src="/assets/svg/arrow.svg" alt="arrow" class="direction"
-        [ngStyle]="{'transform': 'rotate(' + destinationAngle + 'deg)'}">
+        [ngStyle]="{'transform': 'rotate(' + destinationAngle + 'deg)'}" (click)="arrivedAtCheckpoint()">
 
-      <div class="debug small p-1 border border-rounded">
+      <!-- <div class="debug small p-1 border border-rounded">
         <p class="text-uppercase">Debugging</p>
-        <!-- <p>current location:</p>
+         <p>current location:</p>
           <p>{{ currentLocation?.latitude }}, {{ currentLocation?.longitude }}</p>
           <p>destination:</p>
           <p>{{ destination.coordinate?.latitude }}, {{ destination.coordinate?.longitude }}</p>
@@ -16,10 +16,10 @@
           <p>{{ distanceAccuracy }}m</p>
           <p>angle accuracy:</p>
           <p>{{ angleAccuracy }}°</p>
-          <p>{{ error }}</p> -->
+          <p>{{ error }}</p>
         <button class="btn btn-primary mx-2" (click)="arrivedAtCheckpoint()">at Checkpoint</button>
         <button class="btn btn-danger mx-2" (click)="clearStorage()">RESET</button>
-      </div>
+      </div> -->
     </div>
 
     <div class="data">
