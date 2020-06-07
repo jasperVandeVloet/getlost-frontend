@@ -12,9 +12,7 @@ export class HelperService {
   ) { }
 
   public preparePage(title?: string): void {
-    console.log('test');
-    this.rellax = new Rellax('.rellax');
-    console.log('HelperService -> preparePage -> this.rellax', this.rellax);
+    // this.rellax = new Rellax('.rellax');
     this.titleService.setTitle(title);
   }
 

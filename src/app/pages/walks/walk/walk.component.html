@@ -19,7 +19,7 @@
         <div class="specs col d-flex align-items-center">
           <h5 class="m-0"><i class="fas fa-baby-carriage pr-3" *ngIf="walk?.kids_friendly"></i></h5>
           <h5 class="m-0"><i class="fas fa-wheelchair  pr-3" *ngIf="walk?.wheelchair_friendly"></i></h5>
-          <app-difficulty-rating class="rating" [difficulty]="walk?.difficulty"></app-difficulty-rating>
+          <app-difficulty-rating class="rating" [difficulty]="walk.difficulty" *ngIf="walk?.difficulty"></app-difficulty-rating>
         </div>
         <div class="share col-auto d-flex align-items-center justify-content-end">
           <h4 class="d-inline mb-0 text-primary">Deel met</h4>
