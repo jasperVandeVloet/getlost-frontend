@@ -1,18 +1,17 @@
 <div class="home">
-  <div class="header rellax" data-rellax-speed="-12" data-rellax-tablet-speed="-10" data-rellax-desktop-speed="-10" >
-    <img src="/assets/img/hero.jpg" alt="river in the forest" class="header-img">
-    <div class="container">
-      <img src="/assets/img/logo-light.png" alt="Get Lost logo" class="logo rellax" data-rellax-speed="2">
+  <div class="header">
+    <img src="/assets/img/hero.jpg" alt="river in the forest" class="header-img fixed">
+    <div class="container h-50">
+      <img src="/assets/svg/logo-light.svg" alt="Get Lost logo" class="logo parallax-object" appParallax [ratio]="-0.6">
     </div>
   </div>
 
-  <div class="rellax topo-light w-100">
+  <div class="topo-light w-100 content pb-5">
     <div class="roll-over">
       <img src="/assets/img/layer-1.png" alt="Mother and son" class="roll-over-img">
     </div>
 
-
-    <div class="overlay topo-dark text-light py-4">
+    <div class="overlay topo-dark text-light py-4" *ngIf="content?.quote">
       <div class="container">
         <div class="quote row">
           <div class="col-10">
@@ -22,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container pb-5" *ngIf="content?.blog">
       <div class="introduction mt-4">
         <showdown [value]="content?.introduction" class="w-100"></showdown>
       </div>
@@ -52,20 +51,8 @@
       </div>
     </div>
   </div>
-  <ng-template #loading  *ngIf="!content?.id">
+  <ng-template #loading *ngIf="!content?.id">
     <app-loader></app-loader>
   </ng-template>
 
 </div>
-
-
-<!-- <div class="hero w-100">
-  <img src="/assets/img/hero.jpg" alt="" class="hero-img w-100">
-  <img src="/assets/img/logo-dark.png" alt="" class="rellax parallax-logo" data-rellax-speed="-3">
-  <img src="/assets/img/upper.png" alt="" class="rellax parallax-el" data-rellax-speed="1">
-</div> -->
-
-
-<!-- <div class="loader bg-dark">
-  <ng-lottie [options]="options" (animationCreated)="animationCreated($event)"></ng-lottie>
-</div> -->

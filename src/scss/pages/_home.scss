@@ -10,13 +10,18 @@
         height: 100vh;
         position: relative;
 
+        .header-img {
+            top:0;
+        }
+
         .logo {
             width: 50%;
         }
     }
 
-    .rellax {
+    .content {
         position: relative;
+
         .roll-over {
             position: absolute;
             bottom: 100%;
@@ -86,6 +91,8 @@
             height: 250px;
             object-fit: cover;
             border-radius: $border-radius-left;
+            -webkit-filter: brightness(90%) contrast(80%) saturate(90%);
+            filter: brightness(90%) contrast(80%) saturate(90%);
         }
 
         .shadow-left {

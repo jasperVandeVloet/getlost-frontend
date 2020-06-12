@@ -30,6 +30,7 @@ import { NavigationComponent } from './pages/navigation/navigation.component';
 import { CheckpointModalComponent } from './components/checkpoint-modal/checkpoint-modal.component';
 import { FinishModalComponent } from './components/finish-modal/finish-modal.component';
 import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
+import { ParallaxDirective } from './directives/parallax.directive';
 
 // Note we need a separate function as it's required
 // by the AOT compiler. Lottie
@@ -52,6 +53,7 @@ export function playerFactory() {
     CheckpointModalComponent,
     FinishModalComponent,
     HowItWorksComponent,
+    ParallaxDirective,
   ],
   imports: [
     BrowserModule,
