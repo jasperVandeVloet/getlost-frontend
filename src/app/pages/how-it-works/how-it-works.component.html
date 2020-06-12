@@ -7,22 +7,18 @@
   </div>
 
   <div class="topo-light w-100 content pb-5">
-    <div class="topo-dark">
+    <div class="topo-dark" *ngIf="content?.title">
       <div class="container text-light py-3">
         <h1 class="font-italic">{{ content?.title }}</h1>
       </div>
     </div>
 
-    <div class="container mt-4 pb-5">
+    <div class="container mt-4" *ngIf="content?.id; else loading">
       <showdown [value]="content?.body" class="w-100"></showdown>
     </div>
   </div>
 
-  <ng-template #loading *ngIf="!content?.id;">
-    <div class="row w-100 loader">
-      <div class="col h-100">
-        <app-loader></app-loader>
-      </div>
-    </div>
+  <ng-template #loading>
+    <app-loader></app-loader>
   </ng-template>
 </div>

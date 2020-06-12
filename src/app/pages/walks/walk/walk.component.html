@@ -6,13 +6,13 @@
     </div>
   </div>
   <div class="topo-light w-100 content pb-5">
-    <div class="topo-dark">
+    <div class="topo-dark" *ngIf="walk?.title">
       <div class="container text-light py-3">
         <h2 class="font-weight-bold">{{ walk?.title }}</h2>
       </div>
     </div>
 
-    <div class="container mt-5">
+    <div class="container mt-5" *ngIf="walk?.id; else loading">
       <h5 class="text-capitalize">provincie: {{ walk?.province }}</h5>
       <h5 class="text-capitalize">aantal checkpoints: {{ walk?.checkpoint.length }}</h5>
       <div class="row">
@@ -69,13 +69,14 @@
         <qrcode [level]="2" [qrvalue]="basePath + 'wandelingen/' + walk?.slug" *ngIf="!deviceIsMobile()"></qrcode>
       </div>
     </div>
+    <ng-template #loading>
+      <app-loader></app-loader>
+    </ng-template>
   </div>
 </div>
 
 
-<ng-template #loading  *ngIf="!walk?.id">
-  <app-loader></app-loader>
-</ng-template>
+
 
 <ng-template #confirmation>
   <div class="modal-body py-5 text-center">

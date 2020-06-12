@@ -6,13 +6,13 @@
     </div>
   </div>
 
-  <div class="topo-light w-100 content pb-5">
+  <div class="topo-light w-100 content pb-5" >
     <div class="roll-over">
       <img src="/assets/img/layer-1.png" alt="Mother and son" class="roll-over-img">
     </div>
 
-    <div class="overlay topo-dark text-light py-4" *ngIf="content?.quote">
-      <div class="container">
+    <div class="overlay topo-dark text-light py-4" >
+      <div class="container" *ngIf="content?.quote">
         <div class="quote row">
           <div class="col-10">
             <h3 class="quote-sentence">{{ content?.quote }}</h3>
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="container pb-5" *ngIf="content?.blog">
+    <div class="container pb-5" *ngIf="content?.blog; else loading">
       <div class="introduction mt-4">
         <showdown [value]="content?.introduction" class="w-100"></showdown>
       </div>
@@ -51,8 +51,8 @@
       </div>
     </div>
   </div>
-</div>
 
-<ng-template #loading>
-  <app-loader></app-loader>
-</ng-template>
+  <ng-template #loading >
+    <app-loader></app-loader>
+  </ng-template>
+</div>

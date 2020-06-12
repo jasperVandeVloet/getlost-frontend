@@ -7,7 +7,7 @@
   </div>
 
   <div class="topo-light w-100 content pb-5">
-    <div class="topo-dark">
+    <div class="topo-dark" *ngIf="content?.title">
       <div class="container text-light py-3">
         <h2 class="font-italic">{{ content?.title }}</h2>
       </div>

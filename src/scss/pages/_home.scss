@@ -38,12 +38,12 @@
             // overflow: hidden;
             // object-fit: contain;
             //
-            // @include media-breakpoint-up(sm) {
-            //     object-position: 50% 75%;
-            // }
-            // @include media-breakpoint-up(lg) {
-            //     object-position: 50% 78%;
-            // }
+            @include media-breakpoint-up(sm) {
+                object-position: 50% 75%;
+            }
+            @include media-breakpoint-up(lg) {
+                height: auto;
+            }
         }
     }
 

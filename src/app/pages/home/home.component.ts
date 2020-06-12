@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AnimationItem } from 'lottie-web';
-import { AnimationOptions } from 'ngx-lottie';
 import { ApiService } from 'src/app/service/api.service';
 import { HelperService } from 'src/app/service/helper.service';
 
@@ -12,12 +10,6 @@ import { HelperService } from 'src/app/service/helper.service';
 
 export class HomeComponent implements OnInit {
   public content;
-  // public options: AnimationOptions = {
-  //   // path: 'https://assets3.lottiefiles.com/packages/lf20_ZWEJL5.json',
-  //   path: '/assets/json/loading.json',
-  //   autoplay: true,
-  //   loop: false
-  // };
 
   constructor(
     private api: ApiService,
@@ -26,12 +18,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.helper.preparePage('Get Lost - Home');
-    //this.api.getHomepage().subscribe(res => this.content = res);
-    console.log(this.content.id);
+    this.api.getHomepage().subscribe(res => this.content = res);
   }
-
-  // animationCreated(animationItem: AnimationItem): void {
-  //   console.log(animationItem);
-  // }
-
 }
