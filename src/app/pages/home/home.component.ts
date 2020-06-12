@@ -26,7 +26,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.helper.preparePage('Get Lost - Home');
-    this.api.getHomepage().subscribe(res => this.content = res);
+    //this.api.getHomepage().subscribe(res => this.content = res);
+    console.log(this.content.id);
   }
 
   // animationCreated(animationItem: AnimationItem): void {
