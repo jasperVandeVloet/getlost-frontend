@@ -104,21 +104,21 @@ export class NavigationComponent implements OnInit {
    * Access device properties to get geolocation and orientation.
    */
   protected getDataFromDevice(): void {
-    // if (this.device.getBrowserData().mobile === true) {
-    if (this.device.hasLocation()) {
-      if (this.device.hasOrientation()) {
-        this.getGeolocation();
-        this.getOrientation();
+    if (this.device.getBrowserData().mobile === true) {
+      if (this.device.hasLocation()) {
+        if (this.device.hasOrientation()) {
+          this.getGeolocation();
+          this.getOrientation();
+        } else {
+          alert('Device Orientation API not supported.');
+        }
       } else {
-        alert('Device Orientation API not supported.');
+        alert('Device Geolocation API not supported.');
       }
-    } else {
-      alert('Device Geolocation API not supported.');
     }
-    // }
-    // else {
-    //   this.router.navigate(['/']);
-    // }
+    else {
+      this.router.navigate(['/']);
+    }
   }
 
   /**

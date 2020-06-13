@@ -17,9 +17,9 @@
 
   &.loaded{
     animation-name: fadeOut;
-    animation-duration: 2s;
+    animation-duration: 1.5s;
     animation-timing-function: normal;
-    animation-delay: 0s;
+    animation-delay: 1.5s;
     animation-iteration-count: 1;
     animation-direction: normal;
     animation-fill-mode: forwards;
@@ -31,12 +31,55 @@
   }
 
   @keyframes fadeOut {
-    0%{
-      opacity: 1;
-    }
-    100%{
-      opacity: 0;
-    }
+        0%{
+        opacity: 1;
+        -webkit-transform: translate(0);
+        transform: translate(0);
+        }
+
+        10%{
+        -webkit-transform: translate(-1px,-1px);
+        transform: translate(-1px,-1px);
+        }
+        10%{
+            -webkit-transform: translate(1px,-1px);
+            transform: translate(1px,-1px);
+        }
+        30%{
+            -webkit-transform: translate(-1px,1px);
+            transform: translate(-1px,1px);
+        }
+        40%{
+            -webkit-transform: translate(1px,1px);
+            transform: translate(1px,1px);
+        }
+        50%{
+            -webkit-transform: translate(-1px,-1px);
+            transform: translate(-1px,-1px);
+        }
+        60%{
+            -webkit-transform: translate(1px,-1px);
+            transform: translate(1px,-1px);
+        }
+        70%{
+            -webkit-transform: translate(-1px,1px);
+            transform: translate(-1px,1px);
+            opacity: 1;
+        }
+        80%{
+            -webkit-transform: translate(-1px,-1px);
+            transform: translate(-1px,-1px);
+
+        }
+        90%{
+            -webkit-transform: translate(1px,-1px);
+            transform: translate(1px,-1px);
+        }
+        100%{
+            -webkit-transform: translate(0);
+            transform: translate(0);
+            opacity: 0.2;
+        }
   }
 
 }

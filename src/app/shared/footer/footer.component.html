@@ -1,4 +1,4 @@
-<div class="footer topo-light">
+<div class="footer" [ngClass]="{'topo-light': hideFooterOn('/onderweg')}">
   <img src="/assets/img/forest.png" alt="" class="w-100 before">
   <footer class="bg-dark text-primary p-0" *ngIf="hideFooterOn('/onderweg')">
     <div class="container text-center pt-4">
