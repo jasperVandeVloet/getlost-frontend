@@ -103,6 +103,13 @@ showdown {
 
         .logo {
             width: 65%;
+            animation-name: open-vertical;
+            animation-duration: 0.3s;
+            animation-timing-function: ease-in-out;
+            animation-delay: 0;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+            animation-fill-mode: none;
             @include media-breakpoint-up(sm) {
                 width: 40%;
             }
@@ -122,4 +129,15 @@ showdown {
     position: absolute;
 }
 
-
+@keyframes open-vertical {
+    0%{
+        -webkit-transform: scaleY(.5);
+        transform: scaleY(.5);
+        opacity: 0;
+      }
+      100%{
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+        opacity: 1;
+      }
+  }

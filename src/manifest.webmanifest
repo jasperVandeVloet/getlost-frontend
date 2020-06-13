@@ -1,8 +1,8 @@
 {
-  "name": "getlost-frontend",
-  "short_name": "getlost-frontend",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Get Lost",
+  "short_name": "Get Lost",
+  "theme_color": "#228c57",
+  "background_color": "#228c57",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
@@ -54,6 +54,11 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
     }
   ]
 }
