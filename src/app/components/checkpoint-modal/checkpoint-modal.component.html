@@ -14,7 +14,7 @@
 
     <div class="d-flex justify-content-center mt-4" *ngIf="finish">
       <div class="finish">
-        <h3 class="font-weight-bold text-center mb-4">Profiat! Je hebt het gehaald!</h3>
+        <h3 class="font-weight-bold text-center mb-4">Proficiat! Je hebt het gehaald!</h3>
         <h4 class="text-center font-weight-bold">Deel deze wandeling</h4>
         <div class="share col-auto d-flex align-items-center justify-content-center mb-4">
           <a class="btn btn-link" href="https://facebook.com/sharer/sharer.php?u={{ pathAsVar }}" target="_blank"
@@ -32,7 +32,7 @@
             <i class="far fa-envelope"></i>
           </a>
         </div>
-        <h4 class="font-weight-bold text-center text-uppercase">Wat wil je doen?</h4>
+        <h4 class="font-weight-bold text-center text-uppercase">Wat wil je nu doen?</h4>
         <button class="btn btn-primary btn-block" (click)="returnToStart(true)">Keer terug naar eerste punt</button>
         <button class="btn btn-secondary btn-block" (click)="returnToStart(false)">Stop wandeling</button>
       </div>
