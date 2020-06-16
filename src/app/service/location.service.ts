@@ -33,7 +33,6 @@ export class LocationService {
 
     if (points.length > 2) {
       for (let i = 0; i < points.length - 1; i++) {
-        console.log('i', i);
         distance += this.calculateDistance(points[i].coordinate, points[i + 1].coordinate);
       }
     }

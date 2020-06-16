@@ -96,6 +96,11 @@
               </a>
             </li>
           </ul>
+          <div *ngIf="filteredWalks?.length == 0" class="text-center pt-5">
+            <h3>We hebben geen wandelingen gevonden.</h3>
+            <p>Probeer wat ruimer te zoeken.</p>
+          </div>
+
           <ng-template #loading>
             <app-loader></app-loader>
           </ng-template>

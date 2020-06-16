@@ -77,13 +77,11 @@ export class WalksComponent implements OnInit {
   protected getWalks(): void {
     if (this.walks === undefined) {
       this.api.getWalks().subscribe((res) => {
-        // console.log('WalksComponent -> getWalks -> res', res);
         res.forEach((walk) => {
           walk.province = walk.province.replace(/_/g, ' ');
           walk.distance = this.location.getDistance(walk.checkpoint);
         });
         this.walks = res;
-        // console.log('WalksComponent -> getWalks -> res', res);
         this.filteredWalks = res;
 
         this.updateWalks(true);
@@ -126,7 +124,6 @@ export class WalksComponent implements OnInit {
   protected updateWalks(init?: boolean): void {
     const result = [];
     let filter = this.filterForm.value;
-    // console.log('WalksComponent -> updateWalks -> filter', filter);
 
     if (init && sessionStorage.getItem('filter')) {
       // if onInit

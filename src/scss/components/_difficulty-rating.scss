@@ -1,47 +1,46 @@
 .difficulty {
-  width: 30px;
-  height: 20px;
-  position: relative;
-  margin: auto 0px;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    margin: auto 0px;
 }
 
 .difficulty span {
-  display: block;
-  //background-color: $light;
-  position: absolute;
-  height: 100%;
-  width: 3px;
-  border-radius: 20px;
-  left: 0;
-  bottom: 0;
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 3px;
+    border-radius: 20px;
+    left: 0;
+    bottom: 0;
 }
 
 .difficulty span:nth-child(1) {
-  left: 20%;
-  height: 20%;
-  // background-color: #01c009;
+    left: 20%;
+    height: 20%;
+    // background-color: #01c009;
 }
 
 .difficulty span:nth-child(2) {
-  left: 40%;
-  height: 40%;
-  // background-color: #7eaa00;
+    left: 40%;
+    height: 40%;
+    // background-color: #7eaa00;
 }
 
 .difficulty span:nth-child(3) {
-  left: 60%;
-  height: 60%;
-  // background-color: #b68d00;
+    left: 60%;
+    height: 60%;
+    // background-color: #b68d00;
 }
 
 .difficulty span:nth-child(4) {
-  left: 80%;
-  height: 80%;
-  // background-color: #e16300;
+    left: 80%;
+    height: 80%;
+    // background-color: #e16300;
 }
 
 .difficulty span:nth-child(5) {
-  left: 100%;
-  height: 100%;
-  // background-color: #ff0000;
+    left: 100%;
+    height: 100%;
+    // background-color: #ff0000;
 }
